@@ -1,8 +1,6 @@
 package app.src.scenes;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 import app.src.StaticValues;
 import app.src.resources.Arrow;
@@ -19,7 +17,6 @@ import app.src.resources.components.Button;
 public class Level1 extends Scene {
     private Bow bow;
     private Arrow nextArrow;
-    private List<Arrow> arrows;
     
     /**
      * Constructor.
@@ -28,7 +25,7 @@ public class Level1 extends Scene {
      * @see Bow
      */
     public Level1() {
-        setTAG("level1");
+        setTAG("level");
         Monster gobclops = new Monster("gobclops.png", 100, 1);
         registerEntity(gobclops);
         gobclops.setMainHitbox(130, 170, 0, 0);
@@ -47,8 +44,6 @@ public class Level1 extends Scene {
         bow = new Bow();
         registerEntity(bow);
         Point bowLocation = bow.getLocation();
-
-        arrows = new ArrayList<Arrow>();
 
         nextArrow = new Arrow(0, bowLocation.x, bowLocation.y);
         nextArrow.updatePlayerLocation(bowLocation.x, bowLocation.y);
@@ -77,7 +72,6 @@ public class Level1 extends Scene {
     public void shoot() {
         nextArrow.setShot();
         nextArrow.setOriginalImage(nextArrow.getImage());
-        arrows.add(nextArrow);
         Point bowLocation = bow.getLocation();
         Arrow newArrow = new Arrow(0, bowLocation.x, bowLocation.y);
         registerEntity(newArrow);

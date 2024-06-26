@@ -23,6 +23,7 @@ public class Entity {
     private Hitbox mainHitbox;
     private List<Hitbox> critBoxes;
     private Boolean state;
+    private String TAG;
     /** Rectangle to track size and location of the Entity */
     public Rectangle rect;
 
@@ -45,6 +46,7 @@ public class Entity {
         rect = new Rectangle(imageWidth, imageHeight, x, y);
         distance = 0;
         speed = 0;
+        state = true;
         setHealth(health);
     }
 
@@ -54,6 +56,14 @@ public class Entity {
 
     public Boolean getState() {
         return state;
+    }
+
+    public void setTAG(String newTAG) {
+        TAG = newTAG;
+    }
+
+    public String getTAG() {
+        return TAG;
     }
 
     /**

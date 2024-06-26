@@ -4,20 +4,21 @@ import java.awt.Point;
 
 import app.src.StaticValues;
 import app.src.Utilities;
+import app.src.StaticValues.Corners;
 
 public class Arrow extends Entity {
 
     private Point mouseLocation, playerLocation;
     private Boolean shot;
-    private Boolean hit;
     private double direction;
+    private Corners head;
     
     public Arrow(int angle, int x, int y) {
         super("arrow.png", x, y, 10);
+        setTAG("arrow");
         mouseLocation = new Point(0,0);
         playerLocation = new Point(0,0);
         shot = false;
-        hit = false;
         direction = angle;
 
         setLocation(rect.getX(), rect.getY());
@@ -33,20 +34,16 @@ public class Arrow extends Entity {
         return shot;
     }
 
-    public void setHit() {
-        hit = true;
-    }
-
-    public Boolean getHit() {
-        return hit;
+    public Point getHead() {
+        return rect.getCorner(head);
     }
 
     @Override
     public void update() {
         if (shot) {
             int dist = getDistance();
-            if (dist + getSpeed() >= StaticValues.MAX_DISTANCE) {
-                dist = StaticValues.MAX_DISTANCE;
+            if (dist + getSpeed() <= 0) {
+                setState();
             }
             else {
                 updateDistance();
@@ -62,11 +59,12 @@ public class Arrow extends Entity {
         }
         else {
             direction = Utilities.calcAngle(playerLocation, mouseLocation);
+            if (direction < 0) {
+                head = Corners.TOP_LEFT;
+            } else {
+                head = Corners.TOP_RIGHT;
+            }
             rotateImage(direction);
-        }
-        
-        if (hit = true) {
-            setState();
         }
     }
 

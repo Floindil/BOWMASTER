@@ -30,14 +30,7 @@ import app.src.scenes.Scene;
  */
 public class Renderer extends JFrame{
     /** Scene to render */
-    private Scene Scene;
-    /** Components to render */
-    private List<Component> components;
-    /** Entities to render */
-    private List<Entity> entities;
-    /** Buttons to render */
-    private List<Button> buttons;
-    /** Canvas to draw onto */
+    private Scene scene;
     public Canvas canvas = new Canvas();
 
     /**
@@ -45,26 +38,8 @@ public class Renderer extends JFrame{
      * @param newScene Scene to render
      */
     public void setScene(Scene newScene) {
-        Scene = newScene;
-        System.out.println("start scene " + Scene.getTAG());
-        startScene();
-    }
-
-    /**
-     * Returns a list with the registered Buttons
-     * @return buttons
-     */
-    public List<Button> getButtons() {
-        return buttons;
-    }
-
-    /**
-     * Gets the entities, components and buttons to draw them.
-     */
-    public void startScene() {
-        entities = Scene.getEnties();
-        components = Scene.getComponents();
-        buttons = Scene.getButtons();
+        scene = newScene;
+        System.out.println("start scene " + scene.getTAG());
     }
 
     /**
@@ -104,17 +79,17 @@ public class Renderer extends JFrame{
             offScreen.setColor(Color.blue);
             offScreen.drawLine(0, StaticValues.CANVAS_HEIGHT/2, StaticValues.CANVAS_WIDTH, StaticValues.CANVAS_HEIGHT/2);
             offScreen.drawLine(StaticValues.CANVAS_WIDTH/2, 0, StaticValues.CANVAS_WIDTH/2, StaticValues.CANVAS_HEIGHT);
-            
+            List<Component> components = scene.getComponents();
             for (Component component: components) {
                 Point componentLocation = component.getDrawPosition();
                 offScreen.drawImage(component.getImage(), componentLocation.x, componentLocation.y, null);
                 //component.rect.draw(offScreen, Color.red);
             }
-
+            List<Entity> entities = scene.getEnties();
             for (Entity entity: entities) {
                 Point entityLocation = entity.getDrawPosition();
                 offScreen.drawImage(entity.getImage(), entityLocation.x, entityLocation.y, null);
-                //entity.rect.draw(offScreen, Color.red);
+                entity.rect.draw(offScreen, Color.red);
                 if (entity.getMainHitbox() instanceof Rectangle) {
                     entity.getMainHitbox().draw(offScreen, Color.green);
                 }
@@ -122,11 +97,11 @@ public class Renderer extends JFrame{
                     h.draw(offScreen, Color.blue);
                 }
             }
-
+            List<Button> buttons = scene.getButtons();
             for (Button button: buttons) {
                 Point buttonLocation = button.getDrawPosition();
                 offScreen.drawImage(button.getImage(), buttonLocation.x, buttonLocation.y, null);
-                button.rect.draw(offScreen, Color.red);
+                //button.rect.draw(offScreen, Color.red);
             }
 
             onScreen.drawImage(offScreenImage, 0, 0, null);

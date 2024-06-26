@@ -35,9 +35,14 @@ public class Scene {
     }
 
     public void update() {
+        List<Entity> entitiesUpdate = new ArrayList<>();
         for (Entity entity: entities) {
             entity.update();
+            if (entity.getState()) {
+                entitiesUpdate.add(entity);
+            }
         }
+        entities = entitiesUpdate;
         for (Component component: components) {
             component.update();
         }
@@ -135,6 +140,17 @@ public class Scene {
      */
     public List<Entity> getEnties() {
         return entities;
+    }
+
+    public List<Entity> getEntitiesByTag(String TAG) {
+        List<Entity> taggedEntities = new ArrayList<>();
+        for (Entity entity: entities) {
+            String entitiyTAG = entity.getTAG();
+            if (entitiyTAG == TAG) {
+                taggedEntities.add(entity);
+            }
+        }
+        return taggedEntities;
     }
 
     /**
