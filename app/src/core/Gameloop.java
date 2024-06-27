@@ -10,7 +10,6 @@ import app.src.StaticValues;
 import app.src.StaticValues.SceneTag;
 import app.src.resources.Arrow;
 import app.src.resources.Entity;
-import app.src.resources.components.Hitbox;
 import app.src.resources.monsters.Monster;
 import app.src.scenes.Menu;
 import app.src.scenes.Scene;
@@ -78,7 +77,6 @@ public class Gameloop {
             for (Entity monsterEntity: monsters) {
                 Monster monster = (Monster) monsterEntity;
                 int monsterDistance = monster.getDistance();
-                List<Hitbox> hitBoxes = monster.getHitBoxes();
 
                 for (Entity entity: arrows) {
                     Arrow arrow = (Arrow) entity;
@@ -87,19 +85,8 @@ public class Gameloop {
                     if (arrow.getShot()) {
                         if (monsterDistance >= arrowDistance1 && monsterDistance <= arrowDistance2) {
                             Point arrowhead = arrow.getHead();
-                            boolean hit = false;
-                            int multiplier = 0;
-                            for (Hitbox hitBox: hitBoxes) {
-                                Boolean boxHit = hitBox.collidePoint(arrowhead);
-                                if (boxHit) {
-                                    int boxMultiplier = hitBox.getDamageMutiplier();
-                                    if (boxMultiplier > multiplier) {
-                                        multiplier = boxMultiplier;
-                                        hit = boxHit;
-                                    }
-                                }
-                            }
-                            if (hit) {
+                            int multiplier = monster.getMultiplier(arrowhead);
+                            if (multiplier > 0) {
                                 monster.updateHealth(- multiplier * StaticValues.BASEDAMAGE);
                                 arrow.setState();
                                 System.out.println("Hit detected! Remaining health " + monster.getHealth());

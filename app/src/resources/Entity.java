@@ -109,6 +109,20 @@ public class Entity {
         originalImage = newImage;
     }
 
+    public int getMultiplier(Point point) {
+        int multiplier = 0;
+        for (Hitbox hitBox: hitBoxes) {
+            Boolean boxHit = hitBox.collidePoint(point);
+            if (boxHit) {
+                int boxMultiplier = hitBox.getDamageMutiplier();
+                if (boxMultiplier > multiplier) {
+                    multiplier = boxMultiplier;
+                }
+            }
+        }
+        return multiplier;
+    }
+
     /**
      * Creates a Hitbox with size, offsets and damage multiplier.
      * @param width         width of the Hitbox
