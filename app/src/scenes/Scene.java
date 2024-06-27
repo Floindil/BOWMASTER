@@ -23,8 +23,8 @@ public class Scene {
     private Point mousepoint;
 
     /**
-     * Initialises the lists "entities", "components" and "buttons".
-     * Properties from these lists will be drawn in "Renderer.java".
+     * Initialises the lists Entities, Components and Buttons.
+     * Properties from these lists will be drawn in the Renderer.
      */
     public Scene() {
         entities = new ArrayList<>();

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  */
 public class Utilities {
 
-    /** empty Constructor */
+    /** Empty constructor. */
     public Utilities() {
         // empty
     }

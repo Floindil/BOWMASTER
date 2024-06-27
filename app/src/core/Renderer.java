@@ -34,6 +34,18 @@ public class Renderer extends JFrame{
     public Canvas canvas = new Canvas();
 
     /**
+     * Creates a Renderer Object.
+     */
+    public Renderer() {
+        canvas.setPreferredSize(new Dimension(StaticValues.CANVAS_WIDTH, StaticValues.CANVAS_HEIGHT));
+        this.setContentPane(canvas);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.pack();
+        this.setTitle(StaticValues.GAMENAME);
+        this.setVisible(true);
+    }
+
+    /**
      * Takes a Scene for rendering.
      * @param newScene Scene to render
      */
@@ -104,17 +116,5 @@ public class Renderer extends JFrame{
             onScreen.drawImage(offScreenImage, 0, 0, null);
             g.drawImage(onScreenImage, 0, 0, null);
         }
-    }
-
-    /**
-     * Constructor. Creates a Renderer Object.
-     */
-    public Renderer() {
-        canvas.setPreferredSize(new Dimension(StaticValues.CANVAS_WIDTH, StaticValues.CANVAS_HEIGHT));
-        this.setContentPane(canvas);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
-        this.setTitle(StaticValues.GAMENAME);
-        this.setVisible(true);
     }
 }

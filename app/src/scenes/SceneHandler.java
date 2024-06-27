@@ -10,7 +10,6 @@ public class SceneHandler {
     private Scene activeScene, previousScene, newScene;
 
     /**
-     * Default constructor.
      * Takes a scene to set as active.
      * @param activeScene first scene to start
      */

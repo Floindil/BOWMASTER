@@ -20,7 +20,6 @@ public class Level1 extends Scene {
     private Arrow nextArrow;
     
     /**
-     * Constructor.
      * Sets up the Level1 scene.
      * @see Monster
      * @see Bow

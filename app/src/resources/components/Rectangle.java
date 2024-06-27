@@ -15,7 +15,7 @@ public class Rectangle {
     private Point size, location, topLeft, topRight, bottomLeft, bottomRight;
 
     /**
-     * Constructor. Creates a Rectangle object.
+     * Creates a Rectangle object.
      * @param width     width of the rectangle
      * @param height    height of the rectangle
      * @param x         x value of the centerpoint

@@ -13,7 +13,7 @@ public class Bow extends Entity {
     private Point mousePoint = new Point(0, 0);
 
     /**
-     * Constructor. Creates a Entity object, specified as Bow
+     * Creates a Entity object, specified as Bow
      */
     public Bow() {
         super("Bow1.png", 0, 0, 100);

@@ -15,7 +15,6 @@ public class Menu extends Scene {
     private Button start, exit;
 
     /**
-     * Constructor.
      * Sets up the Menu scene.
      */
     public Menu() {

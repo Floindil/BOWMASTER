@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 public class Loader {
     
     /** 
-     * Default constructor for Loader.
      * Initializes the Loader without any specific configuration.
      */
     public Loader() {

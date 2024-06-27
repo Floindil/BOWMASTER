@@ -28,7 +28,7 @@ public class Gameloop {
     private SceneHandler sceneHandler = new SceneHandler(menu);
 
     /**
-     * Constructor.
+     * Empty Constructor.
      */
     public Gameloop() {
 

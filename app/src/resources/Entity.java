@@ -26,7 +26,7 @@ public class Entity {
     public Rectangle rect;
 
     /**
-     * Constructor. Takes an iamge name, coordinates and health value to create an Entity.
+     * Takes an image name, coordinates and health value to create an Entity.
      * Loads the image from app/src/resources/assets.
      * Takes width and Height from the image to create a Rectangle
      * @param imageName name of the image in app/src/resources/assets

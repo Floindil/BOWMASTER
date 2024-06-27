@@ -12,11 +12,11 @@ import app.src.resources.assets.Loader;
 public class Component {
 
     private BufferedImage image;
-    /**Rectangle to track size and location*/
+    /** Rectangle to track size and location */
     public Rectangle rect;
 
     /**
-     * Constructor. Creates a Component with size, location and Rectangle
+     * Creates a Component with size, location and Rectangle
      * @param width     width of the Component
      * @param height    height of the Component
      * @param x         x coordinate of the Component
@@ -27,7 +27,7 @@ public class Component {
     }
 
     /**
-     * Constructor. Creates a Component with image, size, location and Rectangle
+     * Creates a Component with image, size, location and Rectangle
      * Loads an image from app/src/resources/assets.
      * @param imageName image name like "image.png"
      * @param x         x coordinate of the Component

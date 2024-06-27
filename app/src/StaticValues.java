@@ -5,7 +5,7 @@ package app.src;
  */
 public class StaticValues {
 
-    /** empty constructor */
+    /** Empty constructor. */
     public StaticValues() {
         // empty
     }

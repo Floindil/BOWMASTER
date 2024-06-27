@@ -26,7 +26,7 @@ public class Controller extends JPanel{
     private List<Button> buttonlist;
 
     /**
-     * Constructor. Creates a Controller object.
+     * Creates a Controller object.
      * Sets up a mouse handler and tracker.
      */
     public Controller() {
