@@ -5,8 +5,9 @@ import java.awt.Point;
 import app.src.StaticValues;
 import app.src.resources.Arrow;
 import app.src.resources.Bow;
-import app.src.resources.Monster;
 import app.src.resources.components.Button;
+import app.src.resources.monsters.Gobclops;
+import app.src.resources.monsters.Monster;
 
 /**
  * Creates the level1 screen.
@@ -26,11 +27,8 @@ public class Level1 extends Scene {
      */
     public Level1() {
         setTAG("level");
-        Monster gobclops = new Monster("gobclops.png", 100, 1);
+        Gobclops gobclops = new Gobclops();
         registerEntity(gobclops);
-        gobclops.addHitBox(130, 170, 0, 0, 1);
-        gobclops.addHitBox(45, 42, 0, -37, 2);
-        gobclops.addHitBox(80, 60, 0, 40, 2);
 
         Button shooter = new Button(
             StaticValues.CANVAS_WIDTH,

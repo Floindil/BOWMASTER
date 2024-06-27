@@ -1,8 +1,9 @@
-package app.src.resources;
+package app.src.resources.monsters;
 
 import java.awt.Point;
 
 import app.src.StaticValues;
+import app.src.resources.Entity;
 
 /**
  * Creates and handles Monster objects.
