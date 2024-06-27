@@ -41,6 +41,9 @@ public class Component {
         rect = new Rectangle(width, height, x, y);
     }
 
+    /**
+     * Base for update methods of extending subclasses.
+     */
     public void update() {
         // to overide per component
     }
@@ -61,6 +64,10 @@ public class Component {
         image = newImage;
     }
 
+    /**
+     * returns the top left corner of the Rectangle as draw position
+     * @return top left corner
+     */
     public Point getDrawPosition() {
         return rect.getCorner(Corners.TOP_LEFT);
     }

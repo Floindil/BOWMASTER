@@ -6,34 +6,55 @@ import app.src.StaticValues;
 import app.src.Utilities;
 import app.src.StaticValues.Corners;
 
+/**
+ * Extends the Entity class to create Arrows
+ */
 public class Arrow extends Entity {
 
     private Point mouseLocation, playerLocation;
+    /** Indicates, if the Arrow has been shot. */
     private Boolean shot;
     private double direction;
     private Corners head;
     
-    public Arrow(int angle, int x, int y) {
+    /**
+     * Takes x and y coordinates to create an Arrow object.
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    public Arrow(int x, int y) {
         super("arrow.png", x, y, 10);
         setTAG("arrow");
         mouseLocation = new Point(0,0);
         playerLocation = new Point(0,0);
         shot = false;
-        direction = angle;
+        direction = 0;
 
         setLocation(rect.getX(), rect.getY());
         setDistance(StaticValues.MAX_DISTANCE);
         setSpeed(-20);
     }
 
+    /**
+     * Sets the shot attribute to true.
+     */
     public void setShot() {
         shot = true;
     }
 
+    /**
+     * Returns the value of the shot attribute.
+     * @return value of the shot attribute
+     */
     public Boolean getShot() {
         return shot;
     }
 
+    /**
+     * Returns a Point for the hitcalculation.
+     * The head variable is determined by the direction of the Arrow.
+     * @return hit calculation Point
+     */
     public Point getHead() {
         return rect.getCorner(head);
     }
@@ -68,10 +89,22 @@ public class Arrow extends Entity {
         }
     }
 
+    /**
+     * Takes x and y coordinates to store as the mouse location.
+     * Required to calculate the Arrows direction.
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public void updateMouseLocation(int x, int y) {
         mouseLocation = new Point(x, y);
     }
 
+    /**
+     * Takes x and y coordinates to store as the player location.
+     * Required to calculate the Arrows direction.
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public void updatePlayerLocation(int x, int y) {
         playerLocation = new Point(x, y);
     }

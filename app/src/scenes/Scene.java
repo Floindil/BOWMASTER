@@ -23,8 +23,7 @@ public class Scene {
     private Point mousepoint;
 
     /**
-     * Basic constructor, 
-     * initialises the lists "entities", "components" and "buttons".
+     * Initialises the lists "entities", "components" and "buttons".
      * Properties from these lists will be drawn in "Renderer.java".
      */
     public Scene() {
@@ -34,6 +33,10 @@ public class Scene {
         setNewScene(this);
     }
 
+    /**
+     * Calls the update method of all Entities and Components.
+     * Updates the Entity list with all active Entities.
+     */
     public void update() {
         List<Entity> entitiesUpdate = new ArrayList<>();
         for (Entity entity: entities) {
@@ -62,9 +65,9 @@ public class Scene {
     }
 
     /**
-     * set the private mousepoint variable to a new point
-     * @param mousePoint    a Point object to set a new location
-     * @see                 Point
+     * Takes x and y coordinates and stores them in the mousepoint variable
+     * @param x x coordinate a new location
+     * @param y y coordinate a new location
      */
     public void updateMouseLocation(int x, int y) {
         mousepoint = new Point(x, y);
@@ -142,6 +145,11 @@ public class Scene {
         return entities;
     }
 
+    /**
+     * take a TAG  and returns all Entities with the provided TAG.
+     * @param TAG Name of the TAG
+     * @return all Entities with the provided TAG
+     */
     public List<Entity> getEntitiesByTag(String TAG) {
         List<Entity> taggedEntities = new ArrayList<>();
         for (Entity entity: entities) {

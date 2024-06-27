@@ -32,8 +32,9 @@ public class Bow extends Entity {
     }
 
     /**
-     * Takes a point to store as mousePosition
-     * @param newMousePoint point to be stored
+     * Takes x and y cooridinates to store as mousePosition
+     * @param x x coordnate
+     * @param y y coordnate
      */
     public void updateMouseLocation(int x, int y) {
         mousePoint = new Point(x, y);

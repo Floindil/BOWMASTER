@@ -48,18 +48,35 @@ public class Entity {
         setHealth(health);
     }
 
+    /**
+     * Sets the state of the Entity to false.
+     * Entities with state false will be removed.
+     */
     public void setState() {
         state = false;
     }
 
+    /**
+     * Returns the state of an Entity.
+     * @return state of Entity
+     */
     public Boolean getState() {
         return state;
     }
 
+    /**
+     * Takes a String to set as a TAG.
+     * TAGs are used as a identifier.
+     * @param newTAG TAG to be set
+     */
     public void setTAG(String newTAG) {
         TAG = newTAG;
     }
 
+    /**
+     * Returns the Tag of an Entity.
+     * @return TAG of Entity
+     */
     public String getTAG() {
         return TAG;
     }
@@ -73,6 +90,11 @@ public class Entity {
         }
     }
 
+    /**
+     * Takes an angle and rotates the Image of the Entity.
+     * The original Image is used as base for the rotation.
+     * @param angle rotation angle
+     */
     public void rotateImage(double angle) {
         BufferedImage rotatedImage = Utilities.rotateImage(originalImage, angle);
         setImage(rotatedImage);
@@ -80,6 +102,11 @@ public class Entity {
         setLocation(rect.getX(), rect.getY());
     }
 
+    /**
+     * Takes a factor and scales the Image of the Entity.
+     * The original Image is used as base for the scaling.
+     * @param factor scaling factor
+     */
     public void scaleImage(double factor) {
         BufferedImage newImage = Utilities.scaleImage(originalImage, factor);
         setImage(newImage);
@@ -105,10 +132,20 @@ public class Entity {
         image = newImage;
     }
 
+    /**
+     * Takes a BufferedImage and stores it as originalImage.
+     * @param newImage Image to be stored as originalImage
+     */
     public void setOriginalImage(BufferedImage newImage) {
         originalImage = newImage;
     }
 
+    /**
+     * Takes a point and checks, if it collides with any of the Entities Hitbox.
+     * Returns the highest multiplier value of collided Hitboxes.
+     * @param point Point for collision detection
+     * @return multiplier value
+     */
     public int getMultiplier(Point point) {
         int multiplier = 0;
         for (Hitbox hitBox: hitBoxes) {
@@ -130,7 +167,6 @@ public class Entity {
      * @param offsetX       x offset to Entity location
      * @param offsetY       y offset to Entity location
      * @param multiplier    multiplier for received damage of this Hitbox
-     * @return              the created Hitbox object
      */
     public void addHitBox(int width, int height, int offsetX, int offsetY, int multiplier) {
         Hitbox hitBox = new Hitbox(width, height, offsetX, offsetY, multiplier);
@@ -247,6 +283,10 @@ public class Entity {
         health = value;
     }
 
+    /**
+     * Returns the health value of the Entity.
+     * @return health of Entity
+     */
     public int getHealth() {
         return health;
     }

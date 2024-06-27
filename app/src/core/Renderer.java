@@ -30,6 +30,7 @@ import app.src.scenes.Scene;
 public class Renderer extends JFrame{
     /** Scene to render */
     private Scene scene;
+    /** Canvas to draw the Scene on */
     public Canvas canvas = new Canvas();
 
     /**

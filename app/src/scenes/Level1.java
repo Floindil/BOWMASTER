@@ -43,7 +43,7 @@ public class Level1 extends Scene {
         registerEntity(bow);
         Point bowLocation = bow.getLocation();
 
-        nextArrow = new Arrow(0, bowLocation.x, bowLocation.y);
+        nextArrow = new Arrow(bowLocation.x, bowLocation.y);
         nextArrow.updatePlayerLocation(bowLocation.x, bowLocation.y);
         nextArrow.updateMouseLocation(0, 0);
         registerEntity(nextArrow);
@@ -67,11 +67,14 @@ public class Level1 extends Scene {
         nextArrow.updatePlayerLocation(playerLocation.x, playerLocation.y);
     }
 
+    /**
+     * Sets the State of the prepared Arrow to shot ands creates a new Arrow
+     */
     public void shoot() {
         nextArrow.setShot();
         nextArrow.setOriginalImage(nextArrow.getImage());
         Point bowLocation = bow.getLocation();
-        Arrow newArrow = new Arrow(0, bowLocation.x, bowLocation.y);
+        Arrow newArrow = new Arrow(bowLocation.x, bowLocation.y);
         registerEntity(newArrow);
         nextArrow = newArrow;
     }
