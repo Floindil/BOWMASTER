@@ -27,23 +27,26 @@ public class Monster extends Entity {
      */
     @Override
     public void update() {
-        int dist = getDistance();
-        if (dist + getSpeed() >= StaticValues.MAX_DISTANCE) {
-            dist = StaticValues.MAX_DISTANCE;
+        super.update();
+        if (getState()) {
+            int dist = getDistance();
+            if (dist + getSpeed() >= StaticValues.MAX_DISTANCE) {
+                dist = StaticValues.MAX_DISTANCE;
+            }
+            else {
+                updateDistance();
+            }
+
+            double factor = (double) getDistance()  / (double) StaticValues.MAX_DISTANCE;
+
+            scaleImage(factor);
+            scaleHitBoxes(factor);
+
+            int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
+            Point pos = rect.getLocation();
+            pos.y = newY;
+            setLocation(pos.x, pos.y);
+            updateHitBoxes(pos.x, pos.y);
         }
-        else {
-            updateDistance();
-        }
-
-        double factor = (double) getDistance()  / (double) StaticValues.MAX_DISTANCE;
-
-        scaleImage(factor);
-        scaleHitBoxes(factor);
-
-        int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
-        Point pos = rect.getLocation();
-        pos.y = newY;
-        setLocation(pos.x, pos.y);
-        updateHitBoxes(pos.x, pos.y);
     }
 }

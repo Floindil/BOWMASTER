@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.src.StaticValues;
 import app.src.Utilities;
 import app.src.StaticValues.Corners;
 import app.src.resources.assets.Loader;
@@ -20,8 +19,7 @@ import app.src.resources.components.Rectangle;
 public class Entity {
     private BufferedImage image, originalImage;
     private int health, distance, speed;
-    private Hitbox mainHitbox;
-    private List<Hitbox> critBoxes;
+    private List<Hitbox> hitBoxes;
     private Boolean state;
     private String TAG;
     /** Rectangle to track size and location of the Entity */
@@ -37,7 +35,7 @@ public class Entity {
      * @param health    determines how much damage an entity can take before death
      */
     public Entity(String imageName, int x, int y, int health) {
-        critBoxes = new ArrayList<Hitbox>();
+        hitBoxes = new ArrayList<Hitbox>();
         BufferedImage loadedImage = Loader.loadImage(imageName);
         originalImage = loadedImage;
         image = loadedImage;
@@ -70,7 +68,9 @@ public class Entity {
      * Base Method for extended classes.
      */
     public void update() {
-        // to overide per entity
+        if (health < 0) {
+            death();
+        }
     }
 
     public void rotateImage(double angle) {
@@ -110,29 +110,6 @@ public class Entity {
     }
 
     /**
-     * Creates a Hitbox for basic damage.
-     * @param width     width of the Hitbox
-     * @param height    height of the Hitbox
-     * @param offsetX   x offset to Entity location
-     * @param offsetY   y offset to Entity location
-     */
-    public void setMainHitbox(int width, int height, int offsetX, int offsetY) {
-        mainHitbox = createHitbox(width, height, offsetX, offsetY, StaticValues.BASEDAMAGE);
-    }
-
-    /**
-     * Creates a Hitbox for adjusted damage and adds it to the critBoxes list.
-     * @param width         width of the Hitbox
-     * @param height        height of the Hitbox
-     * @param offsetX       x offset to Entity location
-     * @param offsetY       y offset to Entity location
-     * @param multiplier    damage multiplier
-     */
-    public void registerCritBox(int width, int height, int offsetX, int offsetY, int multiplier) {
-        critBoxes.add(createHitbox(width, height, offsetX, offsetY, multiplier));
-    }
-
-    /**
      * Creates a Hitbox with size, offsets and damage multiplier.
      * @param width         width of the Hitbox
      * @param height        height of the Hitbox
@@ -141,9 +118,9 @@ public class Entity {
      * @param multiplier    multiplier for received damage of this Hitbox
      * @return              the created Hitbox object
      */
-    public Hitbox createHitbox(int width, int height, int offsetX, int offsetY, int multiplier) {
+    public void addHitBox(int width, int height, int offsetX, int offsetY, int multiplier) {
         Hitbox hitBox = new Hitbox(width, height, offsetX, offsetY, multiplier);
-        return hitBox;
+        hitBoxes.add(hitBox);
     }
 
     /**
@@ -152,7 +129,7 @@ public class Entity {
      * @param newY  new y corrdinate
      */
     public void updateHitBoxes(int newX, int newY) {
-        List<Hitbox> boxes = getAllHitboxs();
+        List<Hitbox> boxes = getHitBoxes();
         for (Hitbox box: boxes) {
             box.setLocation(newX, newY);
         }
@@ -163,7 +140,7 @@ public class Entity {
      * @param factor scaling factor
      */
     public void scaleHitBoxes(double factor) {
-        List<Hitbox> boxes = getAllHitboxs();
+        List<Hitbox> boxes = getHitBoxes();
         for (Hitbox box: boxes) {
             Point originalSize = box.getOriginalSize();
             Point newSize = Utilities.scaleSize(originalSize.x, originalSize.y, factor);
@@ -176,32 +153,11 @@ public class Entity {
     }
 
     /**
-     * Returns the standard Hitbox.
-     * @return standard Hitbox
-     */
-    public Hitbox getMainHitbox() {
-        return mainHitbox;
-    }
-
-    /**
-     * Returns a list of the critical Hitboxes.
-     * @return critical Hitboxes
-     */
-    public List<Hitbox> getCritBoxes() {
-        return critBoxes;
-    }
-
-    /**
      * Returns a list of all Hitboxes.
      * @return all Hitboxes
      */
-    public List<Hitbox> getAllHitboxs() {
-        List<Hitbox> boxes = new ArrayList<Hitbox>();
-        for (Hitbox hb: critBoxes) {
-            boxes.add(hb);
-        }
-        boxes.add(getMainHitbox());
-        return boxes;
+    public List<Hitbox> getHitBoxes() {
+        return hitBoxes;
     }
 
     /**
@@ -277,11 +233,8 @@ public class Entity {
         health = value;
     }
 
-    /**
-     * Determines what happens when the Entity dies.
-     */
-    public void death() {
-        // determine what happens for Entity death
+    public int getHealth() {
+        return health;
     }
 
     /**
@@ -293,5 +246,12 @@ public class Entity {
         if (health <= 0) {
             death();
         }
+    }
+
+    /**
+     * Determines what happens when the Entity dies.
+     */
+    public void death() {
+        setState();
     }
 }

@@ -28,9 +28,9 @@ public class Level1 extends Scene {
         setTAG("level");
         Monster gobclops = new Monster("gobclops.png", 100, 1);
         registerEntity(gobclops);
-        gobclops.setMainHitbox(130, 170, 0, 0);
-        gobclops.registerCritBox(45, 42, 0, -37, 2);
-        gobclops.registerCritBox(80, 60, 0, 40, 2);
+        gobclops.addHitBox(130, 170, 0, 0, 1);
+        gobclops.addHitBox(45, 42, 0, -37, 2);
+        gobclops.addHitBox(80, 60, 0, 40, 2);
 
         Button shooter = new Button(
             StaticValues.CANVAS_WIDTH,

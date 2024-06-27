@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.Timer;
 
+import app.src.StaticValues;
 import app.src.StaticValues.SceneTag;
 import app.src.resources.Arrow;
 import app.src.resources.Entity;
@@ -77,8 +78,7 @@ public class Gameloop {
             for (Entity monsterEntity: monsters) {
                 Monster monster = (Monster) monsterEntity;
                 int monsterDistance = monster.getDistance();
-                Hitbox mainbox = monster.getMainHitbox();
-                List<Hitbox> critboxes = monster.getCritBoxes();
+                List<Hitbox> hitBoxes = monster.getHitBoxes();
 
                 for (Entity entity: arrows) {
                     Arrow arrow = (Arrow) entity;
@@ -87,21 +87,22 @@ public class Gameloop {
                     if (arrow.getShot()) {
                         if (monsterDistance >= arrowDistance1 && monsterDistance <= arrowDistance2) {
                             Point arrowhead = arrow.getHead();
-                            boolean critHit = false;
-                            for (Hitbox critbox: critboxes) {
-                                Boolean hit = critbox.collidePoint(arrowhead);
-                                if (hit) {
-                                    System.out.println("Crit Hit");
-                                    critHit = true;
-                                    arrow.setState();
+                            boolean hit = false;
+                            int multiplier = 0;
+                            for (Hitbox hitBox: hitBoxes) {
+                                Boolean boxHit = hitBox.collidePoint(arrowhead);
+                                if (boxHit) {
+                                    int boxMultiplier = hitBox.getDamageMutiplier();
+                                    if (boxMultiplier > multiplier) {
+                                        multiplier = boxMultiplier;
+                                        hit = boxHit;
+                                    }
                                 }
                             }
-                            if (!critHit) {
-                                Boolean hit = mainbox.collidePoint(arrowhead);
-                                if (hit) {
-                                    System.out.println("normal Hit");
-                                    arrow.setState();
-                                }
+                            if (hit) {
+                                monster.updateHealth(- multiplier * StaticValues.BASEDAMAGE);
+                                arrow.setState();
+                                System.out.println("Hit detected! Remaining health " + monster.getHealth());
                             }
                         }
                     }
