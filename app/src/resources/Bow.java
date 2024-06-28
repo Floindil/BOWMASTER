@@ -27,6 +27,7 @@ public class Bow extends Entity {
      */
     @Override
     public void update() {
+        super.update();
         double mouseAngle = Utilities.calcAngle(rect.getLocation(),  mousePoint);
         rotateImage(mouseAngle);
     }

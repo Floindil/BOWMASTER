@@ -18,7 +18,7 @@ import app.src.resources.components.Rectangle;
  */
 public class Entity {
     private BufferedImage image, originalImage;
-    private int health, distance, speed;
+    private int health, distance, speed, cooldown;
     private List<Hitbox> hitBoxes;
     private Boolean state;
     private String TAG;
@@ -44,6 +44,7 @@ public class Entity {
         rect = new Rectangle(imageWidth, imageHeight, x, y);
         distance = 0;
         speed = 0;
+        cooldown = 0;
         state = true;
         setHealth(health);
     }
@@ -74,7 +75,7 @@ public class Entity {
     }
 
     /**
-     * Returns the Tag of an Entity.
+     * Returns the TAG of an Entity.
      * @return TAG of Entity
      */
     public String getTAG() {
@@ -82,12 +83,29 @@ public class Entity {
     }
 
     /**
+     * Takes a value and stores it in the cooldown variable.
+     * @param newValue value to be stored
+     */
+    public void setCooldown(int newValue) {
+        cooldown = newValue;
+    }
+
+    /**
+     * Returns the cooldown of an Entity.
+     * @return cooldown of Entity
+     */
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    /**
      * Base Method for extended classes.
+     * Reduces the cooldown, if it is set.
+     * Initiates death when Entity health is below zero.
      */
     public void update() {
-        if (health < 0) {
-            death();
-        }
+        if (cooldown > 0) {cooldown -= 1;}
+        if (health < 0) {death();}
     }
 
     /**

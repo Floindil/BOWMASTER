@@ -70,11 +70,15 @@ public class Level1 extends Scene {
      * Sets the State of the prepared Arrow to shot ands creates a new Arrow
      */
     public void shoot() {
-        nextArrow.setShot();
-        nextArrow.setOriginalImage(nextArrow.getImage());
-        Point bowLocation = bow.getLocation();
-        Arrow newArrow = new Arrow(bowLocation.x, bowLocation.y);
-        registerEntity(newArrow);
-        nextArrow = newArrow;
+        if (bow.getCooldown() <= 0) {
+            nextArrow.setShot();
+            nextArrow.setOriginalImage(nextArrow.getImage());
+            Point bowLocation = bow.getLocation();
+            Arrow newArrow = new Arrow(bowLocation.x, bowLocation.y);
+            registerEntity(newArrow);
+            nextArrow = newArrow;
+            bow.setCooldown(10);
+        }
+        else {System.out.println(bow.getCooldown());}
     }
 }
