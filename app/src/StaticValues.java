@@ -28,6 +28,8 @@ public class StaticValues {
     public static int BASEDAMAGE = 10;
     /** Base value for the cooldown of the bow */
     public static int BOWCOOLDOWN = 30;
+    /** Determines the Padding to the window edge for Monster spawns */
+    public static int SPAWNPADDING = 100;
     /** Available Rectangle corners */
     public static enum Corners {
         /** Top Right corner */

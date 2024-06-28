@@ -23,6 +23,11 @@ public class Monster extends Entity {
         setSpeed(speed);
     }
 
+    public void setX(int newX) {
+        Point location = getLocation();
+        setLocation(newX, location.y);
+    }
+
     /**
      * Updates and scales the position and Hitboxes of the Monster object based on the Distance value.
      */

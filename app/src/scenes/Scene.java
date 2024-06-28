@@ -21,15 +21,18 @@ public class Scene {
     private String TAG;
     private Scene newScene;
     private Point mousepoint;
+    private int counter;
 
     /**
      * Initialises the lists Entities, Components and Buttons.
      * Properties from these lists will be drawn in the Renderer.
      */
     public Scene() {
+        counter = 0;
         entities = new ArrayList<>();
         components = new ArrayList<>();
         buttons = new ArrayList<>();
+        // Fills the newScene Variable with itself to indicate, that the scene does not have to be changed
         setNewScene(this);
     }
 
@@ -38,6 +41,7 @@ public class Scene {
      * Updates the Entity list with all active Entities.
      */
     public void update() {
+        counter += 1;
         List<Entity> entitiesUpdate = new ArrayList<>();
         for (Entity entity: entities) {
             entity.update();
@@ -49,6 +53,15 @@ public class Scene {
         for (Component component: components) {
             component.update();
         }
+    }
+
+    /**
+     * Returns the counter of the Scene.
+     * The counter is used for time based events.
+     * @return
+     */
+    public int counter() {
+        return counter;
     }
 
     /**
