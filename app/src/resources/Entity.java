@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.src.StaticValues;
 import app.src.Utilities;
 import app.src.StaticValues.Corners;
 import app.src.resources.assets.Loader;
@@ -86,8 +87,8 @@ public class Entity {
      * Takes a value and stores it in the cooldown variable.
      * @param newValue value to be stored
      */
-    public void setCooldown(int newValue) {
-        cooldown = newValue;
+    public void setCooldown() {
+        cooldown = StaticValues.BOWCOOLDOWN;
     }
 
     /**

@@ -26,6 +26,8 @@ public class StaticValues {
     public static int UPDATE_PERIOD = 60;
     /** Base Value for damagecaluculation */
     public static int BASEDAMAGE = 10;
+    /** Base value for the cooldown of the bow */
+    public static int BOWCOOLDOWN = 30;
     /** Available Rectangle corners */
     public static enum Corners {
         /** Top Right corner */

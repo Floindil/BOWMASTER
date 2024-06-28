@@ -67,7 +67,8 @@ public class Level1 extends Scene {
     }
 
     /**
-     * Sets the State of the prepared Arrow to shot ands creates a new Arrow
+     * Sets the State of the prepared Arrow to shot and creates a new Arrow
+     * If the Bow is on cooldown, nothing happens.
      */
     public void shoot() {
         if (bow.getCooldown() <= 0) {
@@ -77,7 +78,7 @@ public class Level1 extends Scene {
             Arrow newArrow = new Arrow(bowLocation.x, bowLocation.y);
             registerEntity(newArrow);
             nextArrow = newArrow;
-            bow.setCooldown(10);
+            bow.setCooldown();
         }
         else {System.out.println(bow.getCooldown());}
     }
