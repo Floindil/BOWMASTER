@@ -1,13 +1,16 @@
 package app.src.scenes;
 
 import java.awt.Point;
+import java.util.List;
 
 import app.src.StaticValues;
 import app.src.resources.Arrow;
 import app.src.resources.Bow;
+import app.src.resources.Entity;
 import app.src.resources.components.Button;
-import app.src.resources.monsters.Gobclops;
 import app.src.resources.monsters.Monster;
+import app.src.resources.monsters.MonsterSpawner;
+import app.src.resources.monsters.MonsterValues;
 
 /**
  * Creates the level1 screen.
@@ -18,6 +21,9 @@ import app.src.resources.monsters.Monster;
 public class Level1 extends Scene {
     private Bow bow;
     private Arrow nextArrow;
+    private MonsterSpawner spawner;
+    private MonsterValues monsterValues = new MonsterValues();
+    private int monsterLimit = 5;
     
     /**
      * Sets up the Level1 scene.
@@ -26,8 +32,9 @@ public class Level1 extends Scene {
      */
     public Level1() {
         setTAG("level");
-        Gobclops gobclops = new Gobclops();
-        registerEntity(gobclops);
+
+        spawner = new MonsterSpawner(25, 50);
+        spawner.registerMonster(monsterValues.getGobclops());
 
         Button shooter = new Button(
             StaticValues.CANVAS_WIDTH,
@@ -51,6 +58,11 @@ public class Level1 extends Scene {
     @Override
     public void update() {
         super.update();
+        List<Entity> monsters = getEntitiesByTag("monster");
+        if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
+            Monster newMonster = spawner.spawnMonster();
+            registerEntity(newMonster);
+        };
     }
 
     /**

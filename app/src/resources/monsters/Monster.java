@@ -21,6 +21,7 @@ public class Monster extends Entity {
         super(imageName, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
         setSpeed(speed);
+        update();
     }
 
     public void setX(int newX) {
