@@ -7,21 +7,35 @@ import java.util.Random;
 
 import app.src.StaticValues;
 
+/**
+ * Contains utilities to Spawn new Monsters
+ */
 public class MonsterSpawner {
-    private List<MonsterValues> availableMonsters;
+    private List<MonsterValues> monsterPool;
     private Random duck;
     private Point SpawnRangeX, SpawnTimeRange;
     private int cooldownCounter;
 
+    /**
+     * Takes a lower and upper limit for the delay before the next Monster is spawned
+     * to create a MonsterSpawner
+     * @param lowerSpawnTime lower limit for the delay before the next Monster is spawned
+     * @param upperSpawnTime upper limit for the delay before the next Monster is spawned
+     */
     public MonsterSpawner(int lowerSpawnTime, int upperSpawnTime) {
         duck = new Random();
-        availableMonsters = new ArrayList<>();
+        monsterPool = new ArrayList<>();
         int padding = StaticValues.SPAWNPADDING;
         SpawnRangeX = new Point(0 + padding, StaticValues.CANVAS_WIDTH - padding);
         SpawnTimeRange = new Point(lowerSpawnTime, upperSpawnTime);
         cooldownCounter = 0;
     }
 
+    /**
+     * Checks, if the Spawner is on cooldown.
+     * Sets the cooldown to max, if its lower than 0.
+     * @return false, when the Spawner is on cooldown
+     */
     public Boolean spawnCheck() {
         if (cooldownCounter > 0) {
             cooldownCounter -= 1;
@@ -33,13 +47,22 @@ public class MonsterSpawner {
         }
     }
 
+    /**
+     * Adds a Moster type to the Spawn pool.
+     * @param monster MonsterValues
+     */
     public void registerMonster(MonsterValues monster) {
-        availableMonsters.add(monster);
+        monsterPool.add(monster);
     }
 
+    /**
+     * Takes a Monster type by random from the pool,
+     * Creates the Monster and returns it.
+     * @return random Monster from the pool
+     */
     public Monster spawnMonster() {
-        int index = duck.nextInt(availableMonsters.size());
-        MonsterValues mv = availableMonsters.get(index);
+        int index = duck.nextInt(monsterPool.size());
+        MonsterValues mv = monsterPool.get(index);
         Monster nextMonster = new Monster(mv.getImageName(), mv.getHealth(), mv.getSpeed());
         for (int[] value: mv.getHitboxes()) {
             nextMonster.addHitBox(value[0], value[1], value[2], value[3], value[4]);
@@ -48,6 +71,11 @@ public class MonsterSpawner {
         nextMonster.setX(newX);
         return nextMonster;
     }
+
+    /**
+     * Uses upper and lower time range to set the cooldown
+     * of the Spawner to a random time iside the range.
+     */
     private void setCooldown() {
         int max = SpawnTimeRange.y;
         int min = SpawnTimeRange.x;

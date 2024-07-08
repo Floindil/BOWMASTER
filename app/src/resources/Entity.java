@@ -84,8 +84,7 @@ public class Entity {
     }
 
     /**
-     * Takes a value and stores it in the cooldown variable.
-     * @param newValue value to be stored
+     * Sets the cooldwon counter to max.
      */
     public void setCooldown() {
         cooldown = StaticValues.BOWCOOLDOWN;

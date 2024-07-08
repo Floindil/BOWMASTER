@@ -58,7 +58,7 @@ public class Scene {
     /**
      * Returns the counter of the Scene.
      * The counter is used for time based events.
-     * @return
+     * @return Scene counter.
      */
     public int counter() {
         return counter;

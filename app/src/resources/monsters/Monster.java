@@ -24,6 +24,10 @@ public class Monster extends Entity {
         update();
     }
 
+    /**
+     * Sets the x coordinate to a specified value.
+     * @param newX new value for location.x
+     */
     public void setX(int newX) {
         Point location = getLocation();
         setLocation(newX, location.y);
