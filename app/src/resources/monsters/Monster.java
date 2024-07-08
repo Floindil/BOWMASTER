@@ -3,6 +3,7 @@ package app.src.resources.monsters;
 import java.awt.Point;
 
 import app.src.StaticValues;
+import app.src.Utilities;
 import app.src.resources.Entity;
 
 /**
@@ -11,6 +12,8 @@ import app.src.resources.Entity;
  * @see     Entity
  */
 public class Monster extends Entity {
+
+    private Point playerLocation;
     /**
      * Creates a Monster object.
      * @param imageName image for the Monster in app/src/resources/assets
@@ -31,6 +34,15 @@ public class Monster extends Entity {
     public void setX(int newX) {
         Point location = getLocation();
         setLocation(newX, location.y);
+    }
+
+    /**
+     * Takes x and y coordinates to store in the playerLocation Point.
+     * @param playerX new x coordinate
+     * @param playerY new y coordinate
+     */
+    public void setPlayerLocation(int playerX, int playerY) {
+        playerLocation = new Point(playerX, playerY);
     }
 
     /**
@@ -55,6 +67,15 @@ public class Monster extends Entity {
 
             int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
             Point pos = rect.getLocation();
+            /*
+            double angle = Utilities.calcAngle(playerLocation, pos);
+            int deltaX = (int) (Math.tan(angle) * getSpeed());
+            int newX = pos.x + deltaX;
+            if (pos.x > playerLocation.x) {
+                newX = pos.x - deltaX;
+            }
+            pos.x = newX;
+            */
             pos.y = newY;
             setLocation(pos.x, pos.y);
             updateHitBoxes(pos.x, pos.y);
