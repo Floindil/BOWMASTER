@@ -38,7 +38,10 @@ jobs:
         git rm -rf .
 
         # Copy Javadoc files from docs/javadoc
-        cp -r docs/javadoc/* .
+        cp -r docs/javadoc/. .
+
+        echo "Copied files:"
+        ls -l
 
         # Commit and push changes
         git commit -am "Automated Javadoc deployment"
