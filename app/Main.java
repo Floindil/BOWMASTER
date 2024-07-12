@@ -10,7 +10,7 @@ import app.src.core.Gameloop;
 public class Main {
     
     /**
-     * starts the gameloop.
+     * Starts the gameloop.
      * @see Gameloop
      */
     public Main() {
