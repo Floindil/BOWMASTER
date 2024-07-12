@@ -47,6 +47,8 @@ jobs:
         echo "Copied files:"
         ls -l
 
+        git add .
+
         # Commit and push changes
         git commit -am "Automated Javadoc deployment"
         git push origin gh-pages --force
