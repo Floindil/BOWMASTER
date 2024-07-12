@@ -17,8 +17,8 @@ public class Bow extends Entity {
      */
     public Bow() {
         super("Bow1.png", 0, 0, 100);
-        int x = StaticValues.CANVAS_WIDTH/2;
-        int y = StaticValues.CANVAS_HEIGHT-200;
+        int x = StaticValues.PLAYERSPAWNX;
+        int y = StaticValues.PLAYERSPAWNY;
         rect.setLocation(x, y);
     }
 

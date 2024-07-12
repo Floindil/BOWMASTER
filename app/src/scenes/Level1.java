@@ -56,11 +56,13 @@ public class Level1 extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(Point playerLocation) {
+        super.update(playerLocation);
         List<Entity> monsters = getEntitiesByTag("monster");
         if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
             Monster newMonster = spawner.spawnMonster();
+            newMonster.setPlayerLocation(playerLocation.x, playerLocation.y);
+            newMonster.update();
             registerEntity(newMonster);
         };
     }

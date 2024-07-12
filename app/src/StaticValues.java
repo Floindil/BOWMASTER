@@ -30,6 +30,10 @@ public class StaticValues {
     public static int BOWCOOLDOWN = 5;
     /** Determines the Padding to the window edge for Monster spawns */
     public static int SPAWNPADDING = 100;
+    /** Player start location x */
+    public static int PLAYERSPAWNX = CANVAS_WIDTH/2;
+    /** Player start location y */
+    public static int PLAYERSPAWNY = CANVAS_HEIGHT-200;
     /** Available Rectangle corners */
     public static enum Corners {
         /** Top Right corner */

@@ -40,11 +40,12 @@ public class Scene {
      * Calls the update method of all Entities and Components.
      * Updates the Entity list with all active Entities.
      */
-    public void update() {
+    public void update(Point playerLocation) {
         counter += 1;
         List<Entity> entitiesUpdate = new ArrayList<>();
         for (Entity entity: entities) {
             entity.update();
+            entity.setPlayerLocation(playerLocation.x, playerLocation.y);
             if (entity.getState()) {
                 entitiesUpdate.add(entity);
             }

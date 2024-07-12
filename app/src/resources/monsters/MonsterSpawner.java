@@ -69,6 +69,13 @@ public class MonsterSpawner {
         }
         int newX = duck.nextInt(SpawnRangeX.y - SpawnRangeX.x) + SpawnRangeX.x;
         nextMonster.setX(newX);
+        System.out.println(
+            "Spawned a " +
+            nextMonster.getTAG() +
+            " at location " +
+            nextMonster.getLocation().x +
+            ", " +
+            nextMonster.getLocation().y);
         return nextMonster;
     }
 

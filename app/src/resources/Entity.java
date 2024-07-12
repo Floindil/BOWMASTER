@@ -23,6 +23,7 @@ public class Entity {
     private List<Hitbox> hitBoxes;
     private Boolean state;
     private String TAG;
+    private Point playerLocation;
     /** Rectangle to track size and location of the Entity */
     public Rectangle rect;
 
@@ -48,6 +49,23 @@ public class Entity {
         cooldown = 0;
         state = true;
         setHealth(health);
+    }
+
+    /**
+     * Takes x and y coordinates to store in the playerLocation Point.
+     * @param playerX new x coordinate
+     * @param playerY new y coordinate
+     */
+    public void setPlayerLocation(int playerX, int playerY) {
+        playerLocation = new Point(playerX, playerY);
+    }
+
+    /**
+     * Returns the playerLocation variable.
+     * @return playerLocation
+     */
+    public Point getPlayerLocation() {
+        return playerLocation;
     }
 
     /**

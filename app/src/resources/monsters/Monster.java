@@ -13,7 +13,6 @@ import app.src.resources.Entity;
  */
 public class Monster extends Entity {
 
-    private Point playerLocation;
     /**
      * Creates a Monster object.
      * @param imageName image for the Monster in app/src/resources/assets
@@ -24,7 +23,6 @@ public class Monster extends Entity {
         super(imageName, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
         setSpeed(speed);
-        update();
     }
 
     /**
@@ -34,15 +32,6 @@ public class Monster extends Entity {
     public void setX(int newX) {
         Point location = getLocation();
         setLocation(newX, location.y);
-    }
-
-    /**
-     * Takes x and y coordinates to store in the playerLocation Point.
-     * @param playerX new x coordinate
-     * @param playerY new y coordinate
-     */
-    public void setPlayerLocation(int playerX, int playerY) {
-        playerLocation = new Point(playerX, playerY);
     }
 
     /**
@@ -67,7 +56,8 @@ public class Monster extends Entity {
 
             int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
             Point pos = rect.getLocation();
-            /*
+
+            Point playerLocation = getPlayerLocation();
             double angle = Utilities.calcAngle(playerLocation, pos);
             int deltaX = (int) (Math.tan(angle) * getSpeed());
             int newX = pos.x + deltaX;
@@ -75,7 +65,7 @@ public class Monster extends Entity {
                 newX = pos.x - deltaX;
             }
             pos.x = newX;
-            */
+
             pos.y = newY;
             setLocation(pos.x, pos.y);
             updateHitBoxes(pos.x, pos.y);

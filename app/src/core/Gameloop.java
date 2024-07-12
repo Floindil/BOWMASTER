@@ -64,7 +64,7 @@ public class Gameloop {
         }
         Point mouseLocation = controller.getMousePos();
         activeScene.updateMouseLocation(mouseLocation.x, mouseLocation.y);
-        activeScene.update();
+        activeScene.update(controller.getPlayerLocation());
     }
 
     private void hitCalculation(Scene activeScene) {

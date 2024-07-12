@@ -24,6 +24,7 @@ public class Controller extends JPanel{
     private final MouseTracker tracker;
     /** list of Buttons to check */
     private List<Button> buttonlist;
+    private Point playerLocation;
 
     /**
      * Creates a Controller object.
@@ -33,6 +34,24 @@ public class Controller extends JPanel{
         setSize(StaticValues.CANVAS_WIDTH, StaticValues.CANVAS_HEIGHT);
         handler = new MouseHandler();
         tracker = new MouseTracker();
+        playerLocation = new Point(StaticValues.PLAYERSPAWNX, StaticValues.PLAYERSPAWNY);
+    }
+
+    /**
+     * Takes x and y coordinates to store in the playerLocation Point.
+     * @param playerX new x coordinate
+     * @param playerY new y coordinate
+     */
+    public void setPlayerLocation(int playerX, int playerY) {
+        playerLocation = new Point(playerX, playerY);
+    }
+
+    /**
+     * Returns the playerLocation variable.
+     * @return playerLocation
+     */
+    public Point getPlayerLocation() {
+        return playerLocation;
     }
 
     /**
