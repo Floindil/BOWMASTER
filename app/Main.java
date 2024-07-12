@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 import app.src.core.Gameloop;
 
 /**
- * Main class. Serves as the entry Point to the game.
+ * Main class. Serves as the entry Point to the app.
  */
 public class Main {
     
