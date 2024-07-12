@@ -28,7 +28,7 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-        git commit -m "Committing local changes before switching branches"
+        git commit -a "Committing local changes before switching branches"
         
         # Fetch and checkout gh-pages branch
         git fetch origin gh-pages:gh-pages
