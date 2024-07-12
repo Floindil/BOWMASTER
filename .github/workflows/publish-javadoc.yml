@@ -1,0 +1,44 @@
+name: Publish Javadoc
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '22'
+        distribution: 'adopt'
+
+    - name: Generate Javadoc
+      run: |
+        javadoc -d docs/javadoc app
+
+    - name: Deploy Javadoc to GitHub Pages
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+        # Fetch and checkout gh-pages branch
+        git fetch origin gh-pages:gh-pages
+        git checkout gh-pages || git checkout --orphan gh-pages
+
+        # Clean the directory
+        git rm -rf .
+
+        # Copy Javadoc files from docs/javadoc
+        cp -r ../docs/javadoc/* .
+
+        # Commit and push changes
+        git add .
+        git commit -m "Automated Javadoc deployment"
+        git push origin gh-pages --force
