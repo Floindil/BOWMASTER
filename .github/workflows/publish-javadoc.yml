@@ -38,7 +38,7 @@ jobs:
         git rm -rf .
 
         # Copy Javadoc files from docs/javadoc
-        cp -r ../docs/javadoc/* .
+        cp -r docs/javadoc/* .
 
         # Commit and push changes
         git add .
