@@ -35,7 +35,7 @@ jobs:
         git checkout gh-pages || git checkout --orphan gh-pages
 
         # Clean the directory
-        git rm -rf .
+        # git rm -rf .
 
         # Copy Javadoc files from docs/javadoc
         cp -r docs/javadoc/. . #test
