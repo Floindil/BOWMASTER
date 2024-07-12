@@ -34,6 +34,10 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
+        # List visible folders for verification
+        echo "Visible folders after copying Javadoc:"
+        ls -l | grep '^d'
+
         # Clean the directory
         # git rm -rf .
 
