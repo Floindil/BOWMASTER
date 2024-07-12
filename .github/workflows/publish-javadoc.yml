@@ -41,6 +41,5 @@ jobs:
         cp -r docs/javadoc/* .
 
         # Commit and push changes
-        git add .
-        git commit -m "Automated Javadoc deployment"
+        git commit -am "Automated Javadoc deployment"
         git push origin gh-pages --force
