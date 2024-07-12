@@ -12,7 +12,7 @@ import app.src.resources.components.Button;
  * @see             Scene
  */
 public class Menu extends Scene {
-    private Button start, exit;
+    private Button start, start2, exit;
 
     /**
      * Sets up the Menu scene.
@@ -26,12 +26,18 @@ public class Menu extends Scene {
             Level1 l = new Level1();
             setNewScene(l);
         });
+        start2 = new Button(100, 50, width/2, height/2 - 300, "START 2", Color.BLUE);
+        start2.setAction(() -> {
+            Level2 l2 = new Level2();
+            setNewScene(l2);
+        });
         exit = new Button(100, 50, width/2, height/2 + 100, "EXIT", Color.GRAY);
         exit.setAction(() -> {
             System.exit(0);
         });
         //setBG("HuntersHouse.png");
         registerButton(start);
+        registerButton(start2);
         registerButton(exit);
     }
 }

@@ -18,26 +18,22 @@ import app.src.resources.monsters.MonsterValues;
  * @see Bow
  * @see Scene
  */
-public class Level1 extends Scene {
+public class Level2 extends Scene {
     private Bow bow;
     private Arrow nextArrow;
     private MonsterSpawner spawner;
     private MonsterValues monsterValues = new MonsterValues("placeholder", 0, 0, null);
-    private int monsterLimit = 5;
+    private int monsterLimit = 1;
     
     /**
      * Sets up the Level1 scene.
      * @see Monster
      * @see Bow
      */
-    public Level1() {
-        setTAG("level");
+    public Level2() {
+        setTAG("leve2");
 
         spawner = new MonsterSpawner(25, 50);
-        spawner.registerMonster(monsterValues.getGobclops());
-        spawner.registerMonster(monsterValues.getThoat());
-        spawner.registerMonster(monsterValues.getTentathulu());
-        spawner.registerMonster(monsterValues.getNighloater());
         spawner.registerMonster(monsterValues.getFloaket());
 
         Button shooter = new Button(
@@ -66,6 +62,8 @@ public class Level1 extends Scene {
         if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
             Monster newMonster = spawner.spawnMonster();
             newMonster.setPlayerLocation(playerLocation.x, playerLocation.y);
+            newMonster.setX(200);
+            newMonster.setDistance(StaticValues.MAX_DISTANCE-5);
             newMonster.update();
             registerEntity(newMonster);
         };

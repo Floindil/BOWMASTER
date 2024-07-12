@@ -52,7 +52,13 @@ public class MonsterSpawner {
      * @param monster MonsterValues
      */
     public void registerMonster(MonsterValues monster) {
-        monsterPool.add(monster);
+        MonsterValues values = new MonsterValues(
+            monster.getImageName(),
+            monster.getSpeed(),
+            monster.getHealth(),
+            monster.getHitboxes()
+        );
+        monsterPool.add(values);
     }
 
     /**
