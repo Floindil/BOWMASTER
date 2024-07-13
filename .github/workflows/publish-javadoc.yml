@@ -36,8 +36,6 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
-        cd ..
-        ls -a
         cd docs/
         ls -a
         cd javadoc/
