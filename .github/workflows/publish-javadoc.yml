@@ -41,7 +41,7 @@ jobs:
         fi
 
         # Copy Javadoc files from docs/javadoc
-        ls -a
+        ls .. -a
 
         cp -r ../docs/javadoc/. .
 
