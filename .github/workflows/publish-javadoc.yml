@@ -25,9 +25,9 @@ jobs:
 
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
-        
+
         git add docs/javadoc/.
-        git commit -a
+        git commit -am "commit javadoc"
 
     - name: Deploy Javadoc to GitHub Pages
       run: |
