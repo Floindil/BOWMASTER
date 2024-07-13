@@ -23,29 +23,32 @@ jobs:
       run: |
         javadoc -d docs/javadoc app
 
-        git config --global user.name 'BOTFloindil'
-        git config --global user.email 'floindil@gmail.com'
-        
-        git add docs/javadoc
-        git commit -m "Generated Javadoc"
-        git push origin main
+        # Verify Javadoc generation
+        ls -l docs/javadoc
 
     - name: Deploy Javadoc to GitHub Pages
       run: |
+        git config --global user.name 'BOTFloindil'
+        git config --global user.email 'floindil@gmail.com'
+
         # Fetch and checkout gh-pages branch
         git fetch origin gh-pages:gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
-        cd docs/
-        ls -a
-        cd javadoc/
-        ls -a
+        # Clean the directory
+        git rm -rf .
 
-        # Copy Javadoc files from docs/javadoc
+        # Copy Javadoc files from docs/javadoc to current directory
         cp -r ../docs/javadoc/. .
 
+        # List copied files for verification
+        ls -l
+
+        # Add all files to staging area
         git add .
 
-        # Commit and push changes
-        git commit -am "Automated Javadoc deployment"
+        # Commit changes
+        git commit -m "Automated Javadoc deployment"
+
+        # Push changes to gh-pages branch
         git push origin gh-pages --force
