@@ -36,6 +36,10 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
+        ls -a
+        cd ..
+        ls -a
+        
         # Copy Javadoc files from docs/javadoc
         cp -r ../docs/javadoc/. .
 
