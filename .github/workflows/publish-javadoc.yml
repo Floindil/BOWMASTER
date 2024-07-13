@@ -32,14 +32,13 @@ jobs:
 
     - name: Deploy Javadoc to GitHub Pages
       run: |
+        xclip-copyfile docs/javadoc/. .
         # Fetch and checkout gh-pages branch
         git fetch origin gh-pages:gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
         # Copy Javadoc files from docs/javadoc
-        ls docs/javadoc/ -a
-
-        cp -r docs/javadoc/. .
+        xclip-pastefile
 
         git add .
 
