@@ -41,6 +41,8 @@ jobs:
         fi
 
         # Copy Javadoc files from docs/javadoc
+        ls -a
+        
         cp -r docs/javadoc/. .
 
         git add .
