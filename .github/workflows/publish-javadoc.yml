@@ -38,6 +38,9 @@ jobs:
         # Clean the directory
         git rm -rf .
 
+        # Ensure the docs/javadoc directory exists
+        ls -l ../docs/javadoc
+
         # Copy Javadoc files from docs/javadoc to current directory
         cp -r ../docs/javadoc/. .
 
