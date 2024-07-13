@@ -37,9 +37,10 @@ jobs:
         git checkout gh-pages || git checkout --orphan gh-pages
 
         cd ..
-        cd docs
         ls -a
-        cd javadoc
+        cd docs/
+        ls -a
+        cd javadoc/
         ls-a
 
         # Copy Javadoc files from docs/javadoc
