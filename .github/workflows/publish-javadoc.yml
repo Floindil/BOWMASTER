@@ -39,7 +39,7 @@ jobs:
         cd docs/
         ls -a
         cd javadoc/
-        ls-a
+        ls -a
 
         # Copy Javadoc files from docs/javadoc
         cp -r ../docs/javadoc/. .
