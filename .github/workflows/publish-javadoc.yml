@@ -22,9 +22,8 @@ jobs:
     - name: Generate Javadoc
       run: |
         javadoc -d docs/javadoc app
-
-        # Verify Javadoc generation
-        ls -l docs/javadoc
+        git add docs/javadoc/.
+        git commit -a
 
     - name: Deploy Javadoc to GitHub Pages
       run: |
