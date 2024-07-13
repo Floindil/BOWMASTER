@@ -30,6 +30,8 @@ jobs:
         git commit -m "Generated Javadoc"
         git push origin main
 
+        ls docs/javadoc -a
+
     - name: Deploy Javadoc to GitHub Pages
       run: |
         # Fetch and checkout gh-pages branch
@@ -41,7 +43,7 @@ jobs:
         fi
 
         # Copy Javadoc files from docs/javadoc
-        ls docs/javadoc -a
+        ls ../docs/javadoc -a
 
         cp -r ../docs/javadoc/. .
 
