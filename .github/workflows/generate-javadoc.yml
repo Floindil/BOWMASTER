@@ -21,4 +21,7 @@ jobs:
 
     - name: Generate Javadoc
       run: |
-        javadoc -d docs/javadoc app
+        javadoc -d docs/ app
+        git add docs/.
+        git commit -m "Automated Javadoc deployment"
+        git push origin gh-pages --force
