@@ -59,7 +59,7 @@ public class Monster extends Entity {
 
             Point playerLocation = getPlayerLocation();
             double angle = Utilities.calcAngle(playerLocation, pos);
-            int deltaX = (int) (Math.tan(angle) * getSpeed());
+            int deltaX = Math.abs((int) (Math.tan(angle) * getSpeed()));
             int newX = pos.x + deltaX;
             if (pos.x > playerLocation.x) {
                 newX = pos.x - deltaX;
