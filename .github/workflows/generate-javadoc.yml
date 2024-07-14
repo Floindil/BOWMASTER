@@ -25,7 +25,7 @@ jobs:
 
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
-        
+
         git add docs/.
         git commit -m "Automated Javadoc deployment"
-        git push origin gh-pages --force
+        git push origin main --force
