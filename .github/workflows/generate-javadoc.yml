@@ -1,0 +1,24 @@
+name: Publish Javadoc
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '22'
+        distribution: 'adopt'
+
+    - name: Generate Javadoc
+      run: |
+        javadoc -d docs/javadoc app
