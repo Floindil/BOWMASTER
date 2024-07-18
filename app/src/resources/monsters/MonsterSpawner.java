@@ -14,7 +14,7 @@ public class MonsterSpawner {
     private List<MonsterValues> monsterPool;
     private Random duck;
     private Point SpawnRangeX, SpawnTimeRange;
-    private int cooldownCounter;
+    private int cooldownCounter, monsterCounter;
 
     /**
      * Takes a lower and upper limit for the delay before the next Monster is spawned
@@ -29,6 +29,21 @@ public class MonsterSpawner {
         SpawnRangeX = new Point(0 + padding, StaticValues.CANVAS_WIDTH - padding);
         SpawnTimeRange = new Point(lowerSpawnTime, upperSpawnTime);
         cooldownCounter = 0;
+    }
+
+    /**
+     * Returns the number of already spawned Monsters.
+     * @return Monster count
+     */
+    public int getMonsterCount() {
+        return monsterCounter;
+    }
+
+    /**
+     * Removes all monsters from the Monster pool.
+     */
+    public void updateMonsterPool(List<MonsterValues> monsters) {
+        monsterPool = monsters;
     }
 
     /**
@@ -69,7 +84,7 @@ public class MonsterSpawner {
     public Monster spawnMonster() {
         int index = duck.nextInt(monsterPool.size());
         MonsterValues mv = monsterPool.get(index);
-        Monster nextMonster = new Monster(mv.getImageName(), mv.getHealth(), mv.getSpeed());
+        Monster nextMonster = new Monster(mv.getImageName(), mv.getHealth(), mv.getSpeed(), mv.getTYPE());
         for (int[] value: mv.getHitboxes()) {
             nextMonster.addHitBox(value[0], value[1], value[2], value[3], value[4]);
         }
@@ -77,11 +92,12 @@ public class MonsterSpawner {
         nextMonster.setX(newX);
         System.out.println(
             "Spawned a " +
-            nextMonster.getTAG() +
+            nextMonster.getTYPE() +
             " at location " +
             nextMonster.getLocation().x +
             ", " +
             nextMonster.getLocation().y);
+        monsterCounter += 1;
         return nextMonster;
     }
 

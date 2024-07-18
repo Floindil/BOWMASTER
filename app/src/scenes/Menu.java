@@ -8,8 +8,8 @@ import app.src.resources.components.Button;
 /**
  * Creates the menu screen.
  * Extends the Scene class.
- * @see             Button
- * @see             Scene
+ * @see Button
+ * @see Scene
  */
 public class Menu extends Scene {
     private Button start, start2, exit;

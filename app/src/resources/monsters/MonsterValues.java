@@ -6,7 +6,16 @@ package app.src.resources.monsters;
 public class MonsterValues {
 
     /**
-     * Empty Constructor.
+     * Creates empty MonsterValues.
+     */
+    public MonsterValues() {
+        imageName = "";
+        speed = 0;
+        health = 0;
+        hitboxes = null;
+    }
+    /**
+     * Creates MonsterValues.
      */
     public MonsterValues(String ImageName, int Speed, int Health, int[][] Hitboxes) {
         imageName = ImageName;
@@ -15,6 +24,7 @@ public class MonsterValues {
         hitboxes = Hitboxes;
     }
 
+    private String TYPE;
     private String imageName;
     private int speed;
     private int health;
@@ -25,7 +35,8 @@ public class MonsterValues {
      * @return a Gobclops!
      */
     public MonsterValues getGobclops() {
-        setImageName("Gobclops.png");
+        setTYPE("Gobclops");
+        setImageName(TYPE + ".png");
         setSpeed(1);
         setHealth(100);
         final int[] hitbox1 = {130, 170, 0, 0, 1};
@@ -41,7 +52,8 @@ public class MonsterValues {
      * @return a Thoat!
      */
     public MonsterValues getThoat() {
-        setImageName("Thoat.png");
+        setTYPE("Thoat");
+        setImageName(TYPE + ".png");
         setSpeed(2);
         setHealth(50);
         final int[] hitbox1 = {140, 130, 0, -50, 1};
@@ -59,7 +71,8 @@ public class MonsterValues {
      * @return a Nighloater!
      */
     public MonsterValues getNighloater() {
-        setImageName("Nighloater.png");
+        setTYPE("Nighloater");
+        setImageName(TYPE + ".png");
         setSpeed(5);
         setHealth(20);
         final int[] bodyBox = {100, 160, 0, 0, 1};
@@ -74,7 +87,8 @@ public class MonsterValues {
      * @return a Floaket!
      */
     public MonsterValues getFloaket() {
-        setImageName("Floaket.png");
+        setTYPE("Floaket");
+        setImageName(TYPE + ".png");
         setSpeed(3);
         setHealth(30);
         final int[] lowerBodyBox = {220, 120, 0, 100, 1};
@@ -90,7 +104,8 @@ public class MonsterValues {
      * @return a Tentathulu!
      */
     public MonsterValues getTentathulu() {
-        setImageName("Tentathulu.png");
+        setTYPE("Tentathulu");
+        setImageName(TYPE + ".png");
         setSpeed(1);
         setHealth(100);
         final int[] lowerBodyBox = {260, 140, 0, 70, 1};
@@ -117,6 +132,22 @@ public class MonsterValues {
         };
         setHitboxes(allHitboxes);
         return this;
+    }
+    
+    /**
+     * Sets the TYPE of the Monster.
+     * @param type TYPE of the Monster
+     */
+    public void setTYPE(String type) {
+        TYPE = type;
+    }
+
+    /**
+     * Returns the TYPE of the Monster.
+     * @return TYPE
+     */
+    public String getTYPE() {
+        return TYPE;
     }
 
     /**

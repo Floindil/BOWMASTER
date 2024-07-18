@@ -9,20 +9,31 @@ import app.src.resources.Entity;
 /**
  * Creates and handles Monster objects.
  * Extends the Entity class.
- * @see     Entity
+ * @see Entity
  */
 public class Monster extends Entity {
+
+    private String TYPE;
 
     /**
      * Creates a Monster object.
      * @param imageName image for the Monster in app/src/resources/assets
-     * @param health    hitpoints the Monster can take before dying
-     * @param speed     speed of the Monster
+     * @param health hitpoints the Monster can take before dying
+     * @param speed speed of the Monster
      */
-    public Monster(String imageName, int health, int speed) {
+    public Monster(String imageName, int health, int speed, String type) {
         super(imageName, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
         setSpeed(speed);
+        TYPE = type;
+    }
+
+    /**
+     * Returns the TYPE of the Monster.
+     * @return TYPE
+     */
+    public String getTYPE() {
+        return TYPE;
     }
 
     /**

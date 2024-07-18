@@ -1,6 +1,7 @@
 package app.src.scenes;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.src.StaticValues;
@@ -9,8 +10,8 @@ import app.src.resources.Bow;
 import app.src.resources.Entity;
 import app.src.resources.components.Button;
 import app.src.resources.monsters.Monster;
-import app.src.resources.monsters.MonsterSpawner;
 import app.src.resources.monsters.MonsterValues;
+import app.src.resources.monsters.WaveSpawner;
 
 /**
  * Creates the level1 screen.
@@ -21,9 +22,9 @@ import app.src.resources.monsters.MonsterValues;
 public class Level1 extends Scene {
     private Bow bow;
     private Arrow nextArrow;
-    private MonsterSpawner spawner;
-    private MonsterValues monsterValues = new MonsterValues("placeholder", 0, 0, null);
+    private WaveSpawner spawner;
     private int monsterLimit = 5;
+    private List<Wave> waves;
     
     /**
      * Sets up the Level1 scene.
@@ -32,13 +33,29 @@ public class Level1 extends Scene {
      */
     public Level1() {
         setTAG("level");
+        MonsterValues GOBCLOPS = new MonsterValues().getGobclops();
+        MonsterValues TENTATHULU = new MonsterValues().getTentathulu();
+        MonsterValues FLOAKET = new MonsterValues().getFloaket();
+        MonsterValues NIGHTLOATER = new MonsterValues().getNighloater();
+        MonsterValues THOAT = new MonsterValues().getThoat();
 
-        spawner = new MonsterSpawner(25, 50);
-        spawner.registerMonster(monsterValues.getGobclops());
-        spawner.registerMonster(monsterValues.getThoat());
-        spawner.registerMonster(monsterValues.getTentathulu());
-        spawner.registerMonster(monsterValues.getNighloater());
-        spawner.registerMonster(monsterValues.getFloaket());
+        Wave wave1 = new Wave();
+        wave1.registerMonsters(GOBCLOPS, 1);
+        wave1.registerMonsters(TENTATHULU, 1);
+
+        Wave wave2 = new Wave();
+        wave2.registerMonsters(FLOAKET, 1);
+        wave2.registerMonsters(NIGHTLOATER, 1);
+
+        Wave wave3 = new Wave();
+        wave3.registerMonsters(THOAT, 1);
+
+        waves = new ArrayList<>();
+        waves.add(wave1);
+        waves.add(wave2);
+        waves.add(wave3);
+
+        spawner = new WaveSpawner(waves, 25, 50);
 
         Button shooter = new Button(
             StaticValues.CANVAS_WIDTH,
@@ -63,6 +80,10 @@ public class Level1 extends Scene {
     public void update(Point playerLocation) {
         super.update(playerLocation);
         List<Entity> monsters = getEntitiesByTag("monster");
+        if (spawner.emptyCheck()) {
+            Scene menuScene = new Menu();
+            setNewScene(menuScene);
+        }
         if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
             Monster newMonster = spawner.spawnMonster();
             newMonster.setPlayerLocation(playerLocation.x, playerLocation.y);
