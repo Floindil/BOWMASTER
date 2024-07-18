@@ -24,6 +24,7 @@ public class Controller extends JPanel{
     private final MouseTracker tracker;
     /** list of Buttons to check */
     private List<Button> buttonlist;
+    /** tracks player location */
     private Point playerLocation;
 
     /**

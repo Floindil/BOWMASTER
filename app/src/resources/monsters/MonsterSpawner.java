@@ -41,6 +41,7 @@ public class MonsterSpawner {
 
     /**
      * Removes all monsters from the Monster pool.
+     * @param monsters New List of Monsters
      */
     public void updateMonsterPool(List<MonsterValues> monsters) {
         monsterPool = monsters;

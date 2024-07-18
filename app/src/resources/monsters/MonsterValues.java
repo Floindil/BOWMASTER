@@ -15,7 +15,11 @@ public class MonsterValues {
         hitboxes = null;
     }
     /**
-     * Creates MonsterValues.
+     * Creates MonsterValues from the parameters.
+     * @param ImageName Name of the Image to be loaded from assets
+     * @param Speed Speed value of the Monster
+     * @param Health Health value of the Monster
+     * @param Hitboxes Hitboxes of the Monster
      */
     public MonsterValues(String ImageName, int Speed, int Health, int[][] Hitboxes) {
         imageName = ImageName;

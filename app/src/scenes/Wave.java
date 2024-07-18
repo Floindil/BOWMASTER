@@ -16,7 +16,6 @@ public class Wave {
 
     /**
      * Creates a Wave that holds an amount of available Monsters.
-     * @return a new Wave
      */
     public Wave() {
         monsters = new ArrayList<>();

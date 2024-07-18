@@ -20,6 +20,7 @@ public class Monster extends Entity {
      * @param imageName image for the Monster in app/src/resources/assets
      * @param health hitpoints the Monster can take before dying
      * @param speed speed of the Monster
+     * @param type TYPE of the Monster
      */
     public Monster(String imageName, int health, int speed, String type) {
         super(imageName, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
