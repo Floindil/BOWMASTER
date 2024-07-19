@@ -14,6 +14,7 @@ public class WaveSpawner extends MonsterSpawner {
     private List<Wave> waves;
     private Wave activeWave;
     private int activeWaveIndex;
+    private boolean empty;
 
     /**
      * Takes a list of Waves, a lower and upper Spawn time limit to create a WaveSpawner
@@ -24,8 +25,8 @@ public class WaveSpawner extends MonsterSpawner {
     public WaveSpawner(List<Wave> newWaves ,int lowerSpawnTime, int upperSpawnTime) {
         super(lowerSpawnTime, upperSpawnTime);
         waves = newWaves;
-        activeWaveIndex = 0;
-        updateWave();
+        activeWaveIndex = -1;
+        nextWave();
     }
 
     @Override
@@ -36,30 +37,38 @@ public class WaveSpawner extends MonsterSpawner {
     }
 
     /**
-     * Checks, if there are any waves left.
-     * @return true, if no more waves are left
+     * Checks, if there are any Waves left.
+     * @return true, if no more Waves are left
      */
     public boolean emptyCheck() {
-        if (activeWave.emtpyCheck() && activeWaveIndex + 1 < waves.size()) {
-            activeWaveIndex += 1;
-            updateWave();
-            return false;
+        if (empty) {
+            return empty;
         }
-        else if (activeWave.emtpyCheck()) {
+        else if (activeWave.emtpyCheck() && activeWaveIndex + 1 >= waves.size()) {
             System.out.println("SPAWNER EMPTY!");
-            return true;
+            empty = true;
+            return empty;
         }
         else {
-            return false;
+            return empty;
         }
+    }
+
+    /**
+     * Checks, if the current Wave is empty.
+     * @return true, if the current Wave is empty
+     */
+    public boolean waveCheck() {
+        return activeWave.emtpyCheck();
     }
 
     /**
      * Uses the activeWaveIndex to set a new Wave.
      */
-    private void updateWave() {
+    public void nextWave() {
+        activeWaveIndex += 1;
         activeWave = waves.get(activeWaveIndex);
         updateMonsterPool(activeWave.getMonsters());
-        System.out.println("update wave");
+        System.out.println("> next wave deployed");
     }
 }

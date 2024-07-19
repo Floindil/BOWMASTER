@@ -75,6 +75,7 @@ public class Scene {
      */
     public void setBG(String bgName) {
         Component bg = new Component(bgName, 0, 0);
+        bg.setLocation(bg.getWidth()/2, bg.getHeight()/2);
         registerComponent(bg);
     }
 

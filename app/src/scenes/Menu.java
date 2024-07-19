@@ -19,6 +19,7 @@ public class Menu extends Scene {
      */
     public Menu() {
         setTAG("menu");
+        setBG("bg.png");
         int width = StaticValues.CANVAS_WIDTH;
         int height = StaticValues.CANVAS_HEIGHT;
         start = new Button(100, 50, width/2, height/2 - 100, "START", Color.GRAY);

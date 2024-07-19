@@ -40,6 +40,8 @@ public class Level1 extends Scene {
         MonsterValues NIGHTLOATER = new MonsterValues().getNighloater();
         MonsterValues THOAT = new MonsterValues().getThoat();
 
+        setBG("bg.png");
+
         Wave wave1 = new Wave();
         wave1.registerMonsters(GOBCLOPS, 1);
         wave1.registerMonsters(TENTATHULU, 1);
@@ -81,11 +83,16 @@ public class Level1 extends Scene {
     public void update(Point playerLocation) {
         super.update(playerLocation);
         List<Entity> monsters = getEntitiesByTag("monster");
-        if (spawner.emptyCheck()) {
+        if (spawner.emptyCheck() && monsters.size() <= 0) {
             Scene menuScene = new Menu();
             setNewScene(menuScene);
         }
-        if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
+        else if (spawner.waveCheck()) {
+            if (monsters.size() <= 0) {
+                spawner.nextWave();
+            }
+        }
+        else if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
             Monster newMonster = spawner.spawnMonster();
             newMonster.setPlayerLocation(playerLocation.x, playerLocation.y);
             newMonster.update();

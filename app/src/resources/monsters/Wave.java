@@ -10,12 +10,13 @@ public class Wave {
     
     private List<MonsterValues> monsters;
     private List<Integer> monsterAmounts;
-    private int remaining = 0;
+    private int remaining;
 
     /**
      * Creates a Wave that holds an amount of available Monsters.
      */
     public Wave() {
+        remaining = 0;
         monsters = new ArrayList<>();
         monsterAmounts = new ArrayList<>();
     }
@@ -54,7 +55,13 @@ public class Wave {
         int index = getMonsterIndex(type);
         int amount = monsterAmounts.get(index);
         amount -= 1;
-        monsterAmounts.set(index, amount);
+        if (amount <= 0) {
+            monsters.remove(index);
+            monsterAmounts.remove(index);
+        }
+        else {
+            monsterAmounts.set(index, amount);
+        }
     }
 
     /**
@@ -70,11 +77,12 @@ public class Wave {
      * @return True, if no Monsters are left
      */
     public boolean emtpyCheck() {
-        boolean check = false;
         if (remaining <= 0) {
-            check = true;
+            return true;
         }
-        return check;
+        else {
+            return false;
+        }
     }
 
     /**
