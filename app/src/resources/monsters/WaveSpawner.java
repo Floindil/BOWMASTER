@@ -2,8 +2,6 @@ package app.src.resources.monsters;
 
 import java.util.List;
 
-import app.src.scenes.Wave;
-
 /**
  * Extends the MonsterSpawner to create Monsters from a List
  * and allows to limit the amount of a Monster TYPE.

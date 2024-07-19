@@ -1,9 +1,7 @@
-package app.src.scenes;
+package app.src.resources.monsters;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import app.src.resources.monsters.MonsterValues;
 
 /**
  * Holds types of Monsters and and amount for each type.

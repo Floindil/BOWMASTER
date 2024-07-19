@@ -11,6 +11,7 @@ import app.src.resources.Entity;
 import app.src.resources.components.Button;
 import app.src.resources.monsters.Monster;
 import app.src.resources.monsters.MonsterValues;
+import app.src.resources.monsters.Wave;
 import app.src.resources.monsters.WaveSpawner;
 
 /**
