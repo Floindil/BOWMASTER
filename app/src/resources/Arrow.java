@@ -1,6 +1,7 @@
 package app.src.resources;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import app.src.StaticValues;
 import app.src.Utilities;
@@ -22,8 +23,8 @@ public class Arrow extends Entity {
      * @param x x coordinate
      * @param y y coordinate
      */
-    public Arrow(int x, int y) {
-        super("arrow.png", x, y, 10);
+    public Arrow(BufferedImage loadedImage, int x, int y) {
+        super(loadedImage, x, y, 10);
         setTAG("arrow");
         mouseLocation = new Point(0,0);
         playerLocation = new Point(0,0);

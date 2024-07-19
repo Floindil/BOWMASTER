@@ -1,6 +1,7 @@
 package app.src.resources.monsters;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import app.src.StaticValues;
 import app.src.Utilities;
@@ -17,13 +18,13 @@ public class Monster extends Entity {
 
     /**
      * Creates a Monster object.
-     * @param imageName image for the Monster in app/src/resources/assets
+     * @param loadedImage previously loaded Image for the Monster
      * @param health hitpoints the Monster can take before dying
      * @param speed speed of the Monster
      * @param type TYPE of the Monster
      */
-    public Monster(String imageName, int health, int speed, String type) {
-        super(imageName, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
+    public Monster(BufferedImage loadedImage, int health, int speed, String type) {
+        super(loadedImage, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
         setSpeed(speed);
         TYPE = type;

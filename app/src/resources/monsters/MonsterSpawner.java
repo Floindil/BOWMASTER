@@ -69,7 +69,7 @@ public class MonsterSpawner {
      */
     public void registerMonster(MonsterValues monster) {
         MonsterValues values = new MonsterValues(
-            monster.getImageName(),
+            monster.getImage(),
             monster.getSpeed(),
             monster.getHealth(),
             monster.getHitboxes()
@@ -85,7 +85,7 @@ public class MonsterSpawner {
     public Monster spawnMonster() {
         int index = duck.nextInt(monsterPool.size());
         MonsterValues mv = monsterPool.get(index);
-        Monster nextMonster = new Monster(mv.getImageName(), mv.getHealth(), mv.getSpeed(), mv.getTYPE());
+        Monster nextMonster = new Monster(mv.getImage(), mv.getHealth(), mv.getSpeed(), mv.getTYPE());
         for (int[] value: mv.getHitboxes()) {
             nextMonster.addHitBox(value[0], value[1], value[2], value[3], value[4]);
         }

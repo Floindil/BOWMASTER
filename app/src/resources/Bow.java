@@ -1,22 +1,24 @@
 package app.src.resources;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import app.src.StaticValues;
 import app.src.Utilities;
 
 /**
- * Extends the Entity class to create a Bow
+ * Extends the Entity class to create a Bow.
  * @see Entity
  */
 public class Bow extends Entity {
     private Point mousePoint = new Point(0, 0);
 
     /**
-     * Creates a Entity object, specified as Bow
+     * Takes an Image and creates a Entity object, specified as Bow.
+     * @param loadedImage previously loaded Image
      */
-    public Bow() {
-        super("Bow1.png", 0, 0, 100);
+    public Bow(BufferedImage loadedImage) {
+        super(loadedImage, 0, 0, 100);
         int x = StaticValues.PLAYERSPAWNX;
         int y = StaticValues.PLAYERSPAWNY;
         rect.setLocation(x, y);

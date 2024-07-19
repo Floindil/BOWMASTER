@@ -8,7 +8,6 @@ import java.util.List;
 import app.src.StaticValues;
 import app.src.Utilities;
 import app.src.StaticValues.Corners;
-import app.src.resources.assets.Loader;
 import app.src.resources.components.Hitbox;
 import app.src.resources.components.Rectangle;
 
@@ -31,14 +30,13 @@ public class Entity {
      * Takes an image name, coordinates and health value to create an Entity.
      * Loads the image from app/src/resources/assets.
      * Takes width and Height from the image to create a Rectangle
-     * @param imageName name of the image in app/src/resources/assets
-     * @param x         x coodinate for the location
-     * @param y         y coodinate for the location
-     * @param health    determines how much damage an entity can take before death
+     * @param loadedImage previously loaded Image
+     * @param x x coodinate for the location
+     * @param y y coodinate for the location
+     * @param health determines how much damage an entity can take before death
      */
-    public Entity(String imageName, int x, int y, int health) {
+    public Entity(BufferedImage loadedImage, int x, int y, int health) {
         hitBoxes = new ArrayList<Hitbox>();
-        BufferedImage loadedImage = Loader.loadImage(imageName);
         originalImage = loadedImage;
         image = loadedImage;
         int imageWidth = image.getWidth();

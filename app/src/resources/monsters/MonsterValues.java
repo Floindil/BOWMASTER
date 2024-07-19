@@ -1,46 +1,50 @@
 package app.src.resources.monsters;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Stores the blueprints for Monsters.
  */
 public class MonsterValues {
 
-    /**
-     * Creates empty MonsterValues.
-     */
-    public MonsterValues() {
-        imageName = "";
-        speed = 0;
-        health = 0;
-        hitboxes = null;
-    }
-    /**
-     * Creates MonsterValues from the parameters.
-     * @param ImageName Name of the Image to be loaded from assets
-     * @param Speed Speed value of the Monster
-     * @param Health Health value of the Monster
-     * @param Hitboxes Hitboxes of the Monster
-     */
-    public MonsterValues(String ImageName, int Speed, int Health, int[][] Hitboxes) {
-        imageName = ImageName;
-        speed = Speed;
-        health = Health;
-        hitboxes = Hitboxes;
-    }
-
+    private BufferedImage image;
     private String TYPE;
-    private String imageName;
     private int speed;
     private int health;
     private int[][] hitboxes;
 
     /**
+     * Creates empty MonsterValues.
+     */
+    public MonsterValues() {
+        image = null;
+        speed = 0;
+        health = 0;
+        hitboxes = null;
+    }
+
+    /**
+     * Creates MonsterValues from the parameters.
+     * @param image Image previously loaded from assets
+     * @param Speed Speed value of the Monster
+     * @param Health Health value of the Monster
+     * @param Hitboxes Hitboxes of the Monster
+     */
+    public MonsterValues(BufferedImage loadedImage, int Speed, int Health, int[][] Hitboxes) {
+        image = loadedImage;
+        speed = Speed;
+        health = Health;
+        hitboxes = Hitboxes;
+    }
+
+    /**
      * Creates and returns a Gobclops!
+     * @param loadedImage previously loaded Image
      * @return a Gobclops!
      */
-    public MonsterValues getGobclops() {
+    public MonsterValues getGobclops(BufferedImage loadedImage) {
         setTYPE("Gobclops");
-        setImageName(TYPE + ".png");
+        setImage(loadedImage);
         setSpeed(1);
         setHealth(100);
         final int[] hitbox1 = {130, 170, 0, 0, 1};
@@ -53,11 +57,12 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Thoat!
+     * @param loadedImage previously loaded Image
      * @return a Thoat!
      */
-    public MonsterValues getThoat() {
+    public MonsterValues getThoat(BufferedImage loadedImage) {
         setTYPE("Thoat");
-        setImageName(TYPE + ".png");
+        setImage(loadedImage);
         setSpeed(2);
         setHealth(50);
         final int[] hitbox1 = {140, 130, 0, -50, 1};
@@ -72,11 +77,12 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Nighloater!
+     * @param loadedImage previously loaded Image
      * @return a Nighloater!
      */
-    public MonsterValues getNighloater() {
+    public MonsterValues getNighloater(BufferedImage loadedImage) {
         setTYPE("Nighloater");
-        setImageName(TYPE + ".png");
+        setImage(loadedImage);
         setSpeed(5);
         setHealth(20);
         final int[] bodyBox = {100, 160, 0, 0, 1};
@@ -88,11 +94,12 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Floaket!
+     * @param loadedImage previously loaded Image
      * @return a Floaket!
      */
-    public MonsterValues getFloaket() {
+    public MonsterValues getFloaket(BufferedImage loadedImage) {
         setTYPE("Floaket");
-        setImageName(TYPE + ".png");
+        setImage(loadedImage);
         setSpeed(3);
         setHealth(30);
         final int[] lowerBodyBox = {220, 120, 0, 100, 1};
@@ -105,11 +112,12 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Tentathulu!
+     * @param loadedImage previously loaded Image
      * @return a Tentathulu!
      */
-    public MonsterValues getTentathulu() {
+    public MonsterValues getTentathulu(BufferedImage loadedImage) {
         setTYPE("Tentathulu");
-        setImageName(TYPE + ".png");
+        setImage(loadedImage);
         setSpeed(1);
         setHealth(100);
         final int[] lowerBodyBox = {260, 140, 0, 70, 1};
@@ -159,16 +167,16 @@ public class MonsterValues {
      * The name is used to load an image from assets.
      * @param newName new image name
      */
-    public void setImageName(String newName) {
-        imageName = newName;
+    public void setImage(BufferedImage newImage) {
+        image = newImage;
     }
 
     /**
-     * Returns the name of the Monster image.
-     * @return image name
+     * Returns the Monster image.
+     * @return image
      */
-    public String getImageName() {
-        return imageName;
+    public BufferedImage getImage() {
+        return image;
     }
 
     /**

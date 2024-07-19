@@ -1,6 +1,7 @@
 package app.src.scenes;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import app.src.StaticValues;
 import app.src.resources.Arrow;
 import app.src.resources.Bow;
 import app.src.resources.Entity;
+import app.src.resources.assets.Loader;
 import app.src.resources.components.Button;
 import app.src.resources.monsters.Monster;
 import app.src.resources.monsters.MonsterValues;
@@ -26,6 +28,7 @@ public class Level1 extends Scene {
     private WaveSpawner spawner;
     private int monsterLimit = 5;
     private List<Wave> waves;
+    private BufferedImage imgArrow;
     
     /**
      * Sets up the Level1 scene.
@@ -34,11 +37,20 @@ public class Level1 extends Scene {
      */
     public Level1() {
         setTAG("level");
-        MonsterValues GOBCLOPS = new MonsterValues().getGobclops();
-        MonsterValues TENTATHULU = new MonsterValues().getTentathulu();
-        MonsterValues FLOAKET = new MonsterValues().getFloaket();
-        MonsterValues NIGHTLOATER = new MonsterValues().getNighloater();
-        MonsterValues THOAT = new MonsterValues().getThoat();
+
+        BufferedImage imgGobclops = Loader.loadImage("Gobclops.png");
+        BufferedImage imgTentathulu = Loader.loadImage("Tentathulu.png");
+        BufferedImage imgFloaket = Loader.loadImage("Floaket.png");
+        BufferedImage imgNighloater = Loader.loadImage("Nighloater.png");
+        BufferedImage imgThoat = Loader.loadImage("Thoat.png");
+        BufferedImage imgBow = Loader.loadImage("Bow1.png");
+        imgArrow = Loader.loadImage("arrow.png");
+
+        MonsterValues GOBCLOPS = new MonsterValues().getGobclops(imgGobclops);
+        MonsterValues TENTATHULU = new MonsterValues().getTentathulu(imgTentathulu);
+        MonsterValues FLOAKET = new MonsterValues().getFloaket(imgFloaket);
+        MonsterValues NIGHTLOATER = new MonsterValues().getNighloater(imgNighloater);
+        MonsterValues THOAT = new MonsterValues().getThoat(imgThoat);
 
         setBG("bg.png");
 
@@ -69,11 +81,11 @@ public class Level1 extends Scene {
         shooter.setAction(() -> {shoot();});
         registerButton(shooter);
 
-        bow = new Bow();
+        bow = new Bow(imgBow);
         registerEntity(bow);
         Point bowLocation = bow.getLocation();
 
-        nextArrow = new Arrow(bowLocation.x, bowLocation.y);
+        nextArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
         nextArrow.updatePlayerLocation(bowLocation.x, bowLocation.y);
         nextArrow.updateMouseLocation(0, 0);
         registerEntity(nextArrow);
@@ -122,11 +134,10 @@ public class Level1 extends Scene {
             nextArrow.setShot();
             nextArrow.setOriginalImage(nextArrow.getImage());
             Point bowLocation = bow.getLocation();
-            Arrow newArrow = new Arrow(bowLocation.x, bowLocation.y);
+            Arrow newArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
             registerEntity(newArrow);
             nextArrow = newArrow;
             bow.setCooldown();
         }
-        else {System.out.println(bow.getCooldown());}
     }
 }
