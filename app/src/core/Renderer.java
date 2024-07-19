@@ -51,7 +51,7 @@ public class Renderer extends JFrame{
      */
     public void setScene(Scene newScene) {
         scene = newScene;
-        System.out.println("start scene " + scene.getTAG());
+        System.out.println("> start scene " + scene.getTAG());
     }
 
     /**

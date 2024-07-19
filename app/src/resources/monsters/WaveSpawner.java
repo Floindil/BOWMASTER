@@ -25,8 +25,9 @@ public class WaveSpawner extends MonsterSpawner {
     public WaveSpawner(List<Wave> newWaves ,int lowerSpawnTime, int upperSpawnTime) {
         super(lowerSpawnTime, upperSpawnTime);
         waves = newWaves;
-        activeWaveIndex = -1;
-        nextWave();
+        activeWaveIndex = 0;
+        activeWave = waves.get(activeWaveIndex);
+        updateMonsterPool(activeWave.getMonsters());
     }
 
     @Override
