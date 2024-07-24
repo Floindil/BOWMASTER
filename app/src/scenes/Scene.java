@@ -39,7 +39,7 @@ public class Scene {
     /**
      * Calls the update method of all Entities and Components.
      * Takes the playerlocation and updates the Entity list with all active Entities.
-     * @param playerlocation to update all in all Entities.
+     * @param playerLocation to update all in all Entities.
      */
     public void update(Point playerLocation) {
         counter += 1;
