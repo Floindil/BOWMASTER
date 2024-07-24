@@ -26,6 +26,7 @@ public class Monster extends Entity {
     public Monster(BufferedImage loadedImage, int health, int speed, String type) {
         super(loadedImage, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
+        setHealthbar();
         setSpeed(speed);
         TYPE = type;
     }

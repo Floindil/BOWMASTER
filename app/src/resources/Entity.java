@@ -1,5 +1,7 @@
 package app.src.resources;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -18,9 +20,9 @@ import app.src.resources.components.Rectangle;
  */
 public class Entity {
     private BufferedImage image, originalImage;
-    private int health, distance, speed, cooldown;
+    private int maxHealth, health, distance, speed, cooldown;
     private List<Hitbox> hitBoxes;
-    private Boolean state;
+    private Boolean state, healthbar;
     private String TAG;
     private Point playerLocation;
     /** Rectangle to track size and location of the Entity */
@@ -46,7 +48,13 @@ public class Entity {
         speed = 0;
         cooldown = 0;
         state = true;
+        healthbar = false;
+        maxHealth = health;
         setHealth(health);
+    }
+
+    public void setHealthbar() {
+        healthbar = true;
     }
 
     /**
@@ -139,10 +147,27 @@ public class Entity {
     /**
      * Takes a factor and scales the Image of the Entity.
      * The original Image is used as base for the scaling.
+     * If the healthbar option is set, a healthbar will be drawn.
      * @param factor scaling factor
      */
     public void scaleImage(double factor) {
-        BufferedImage newImage = Utilities.scaleImage(originalImage, factor);
+        BufferedImage newImage = new BufferedImage(
+                originalImage.getWidth(),
+                originalImage.getHeight(),
+                originalImage.getType()
+            );
+        if (healthbar) {
+            Graphics2D g = newImage.createGraphics();
+            g.drawImage(originalImage, null, 0, 0);
+            int imgWidth = originalImage.getWidth();
+            int hbWidth = (int) (imgWidth * health / maxHealth);
+            g.setColor(Color.RED);
+            g.fillRect((imgWidth - hbWidth) /2, 0, hbWidth, 16);
+            newImage = Utilities.scaleImage(newImage, factor);
+        }
+        else {
+            newImage = Utilities.scaleImage(originalImage, factor);
+        }
         setImage(newImage);
 
         int newWidth = newImage.getWidth();

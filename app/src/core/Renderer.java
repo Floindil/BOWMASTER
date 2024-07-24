@@ -16,7 +16,6 @@ import app.src.StaticValues;
 import app.src.resources.Entity;
 import app.src.resources.components.Button;
 import app.src.resources.components.Component;
-import app.src.resources.components.Hitbox;
 import app.src.scenes.Scene;
 
 /**
@@ -101,10 +100,12 @@ public class Renderer extends JFrame{
             for (Entity entity: entities) {
                 Point entityLocation = entity.getDrawPosition();
                 offScreen.drawImage(entity.getImage(), entityLocation.x, entityLocation.y, null);
+                /*
                 entity.rect.draw(offScreen, Color.red);
                 for (Hitbox h: entity.getHitBoxes()) {
                     h.draw(offScreen, Color.blue);
                 }
+                */
             }
             List<Button> buttons = scene.getButtons();
             for (Button button: buttons) {
