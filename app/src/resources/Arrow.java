@@ -19,7 +19,8 @@ public class Arrow extends Entity {
     private Corners head;
     
     /**
-     * Takes x and y coordinates to create an Arrow object.
+     * Takes and Image, x and y coordinates to create an Arrow object.
+     * @param loadedImage previously loaded Image
      * @param x x coordinate
      * @param y y coordinate
      */

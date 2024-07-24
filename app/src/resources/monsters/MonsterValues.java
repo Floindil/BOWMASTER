@@ -25,7 +25,7 @@ public class MonsterValues {
 
     /**
      * Creates MonsterValues from the parameters.
-     * @param image Image previously loaded from assets
+     * @param loadedImage Image previously loaded from assets
      * @param Speed Speed value of the Monster
      * @param Health Health value of the Monster
      * @param Hitboxes Hitboxes of the Monster
@@ -165,7 +165,7 @@ public class MonsterValues {
     /**
      * Sets the name of the Monster image.
      * The name is used to load an image from assets.
-     * @param newName new image name
+     * @param newImage image name
      */
     public void setImage(BufferedImage newImage) {
         image = newImage;

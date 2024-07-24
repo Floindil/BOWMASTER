@@ -53,6 +53,10 @@ public class Entity {
         setHealth(health);
     }
 
+    /**
+     * Sets the Healthbar variable to true and inidcates
+     * that a healthbar should be drawn for the Entity.
+     */
     public void setHealthbar() {
         healthbar = true;
     }

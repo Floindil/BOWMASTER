@@ -65,7 +65,8 @@ public class Wave {
     }
 
     /**
-     * Decreases the remaining variable by 1.
+     * Decreases the remaining variable of a Monster type by 1.
+     * @param type Monster type to be decreased
      */
     public void decreaseRemaining(String type) {
         decreaseMonsterAmount(type);
