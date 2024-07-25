@@ -1,4 +1,4 @@
 /**
- * Main package, holds all other packages.
+ * Main package, contains all other packages.
  */
 package app;
