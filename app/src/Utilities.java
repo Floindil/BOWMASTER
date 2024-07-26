@@ -18,6 +18,19 @@ public class Utilities {
     }
 
     /**
+     * Takes 2 Points, calculates and returns the direct distance between them
+     * @param P1 first Point for calculation (basepoint)
+     * @param P2 second Point for calculation
+     * @return rect distance between the two Points
+     */
+    public static int calcDistance(Point P1, Point P2) {
+        double lenX = Math.abs(P1.x - P2.x);
+        double lenY = Math.abs(P1.y - P2.y);
+        int distance = (int) (Math.sqrt(lenX*lenX + lenY*lenY));
+        return distance;
+    }
+
+    /**
      * Calculates the angle between two points in radiants,
      * the angle is calculated above the base with the value 0 pointing north.
      * @param P1    basepoint for calculation

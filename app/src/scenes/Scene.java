@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.src.resources.Corosshair;
 import app.src.resources.Entity;
 import app.src.resources.components.Button;
 import app.src.resources.components.Component;
@@ -18,6 +19,8 @@ public class Scene {
     private List<Entity> entities;
     private List<Component> components;
     private List<Button> buttons;
+    private boolean menu;
+    private Corosshair crosshair;
     private String TAG;
     private Scene newScene;
     private Point mousepoint;
@@ -27,11 +30,16 @@ public class Scene {
      * Initialises the lists Entities, Components and Buttons.
      * Properties from these lists will be drawn in the Renderer.
      */
-    public Scene() {
+    public Scene(boolean isMenu) {
         counter = 0;
         entities = new ArrayList<>();
         components = new ArrayList<>();
         buttons = new ArrayList<>();
+        menu = isMenu;
+        crosshair = new Corosshair();
+        if (!menu) {
+            registerEntity(crosshair);
+        }
         // Fills the newScene Variable with itself to indicate, that the scene does not have to be changed
         setNewScene(this);
     }
@@ -80,6 +88,10 @@ public class Scene {
         registerComponent(bg);
     }
 
+    public Point getCrossHairLocation() {
+        return crosshair.getLocation();
+    }
+
     /**
      * Takes x and y coordinates and stores them in the mousepoint variable
      * @param x x coordinate a new location
@@ -87,6 +99,7 @@ public class Scene {
      */
     public void updateMouseLocation(int x, int y) {
         mousepoint = new Point(x, y);
+        crosshair.updateMouseLocation(x, y);
     }
 
     /**

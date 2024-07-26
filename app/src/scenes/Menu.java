@@ -16,6 +16,7 @@ public class Menu extends Scene {
      * Sets up the Menu scene.
      */
     public Menu() {
+        super(true);
         setTAG("menu");
         setBG("bg.png");
         int width = StaticValues.CANVAS_WIDTH;

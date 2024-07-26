@@ -36,6 +36,7 @@ public class Level1 extends Scene {
      * @see Bow
      */
     public Level1() {
+        super(false);
         setTAG("level");
 
         BufferedImage imgGobclops = Loader.loadImage("Gobclops.png");
@@ -86,8 +87,6 @@ public class Level1 extends Scene {
         Point bowLocation = bow.getLocation();
 
         nextArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
-        nextArrow.updatePlayerLocation(bowLocation.x, bowLocation.y);
-        nextArrow.updateMouseLocation(0, 0);
         registerEntity(nextArrow);
     }
 
@@ -106,7 +105,6 @@ public class Level1 extends Scene {
         }
         else if (spawner.spawnCheck() && monsterLimit > monsters.size()) {
             Monster newMonster = spawner.spawnMonster();
-            newMonster.setPlayerLocation(playerLocation.x, playerLocation.y);
             newMonster.update();
             registerEntity(newMonster);
         };
@@ -122,7 +120,7 @@ public class Level1 extends Scene {
         bow.updateMouseLocation(x, y);
         nextArrow.updateMouseLocation(x, y);
         Point playerLocation = bow.getLocation();
-        nextArrow.updatePlayerLocation(playerLocation.x, playerLocation.y);
+        nextArrow.setPlayerLocation(playerLocation.x, playerLocation.y);
     }
 
     /**
@@ -131,8 +129,10 @@ public class Level1 extends Scene {
      */
     public void shoot() {
         if (bow.getCooldown() <= 0) {
+            Point crosshairLocation = getCrossHairLocation();
             nextArrow.setShot();
             nextArrow.setOriginalImage(nextArrow.getImage());
+            nextArrow.setTarget(crosshairLocation.x, crosshairLocation.y);
             Point bowLocation = bow.getLocation();
             Arrow newArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
             registerEntity(newArrow);

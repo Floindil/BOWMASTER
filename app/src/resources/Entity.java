@@ -50,6 +50,7 @@ public class Entity {
         state = true;
         healthbar = false;
         maxHealth = health;
+        playerLocation = new Point(0,0);
         setHealth(health);
     }
 
