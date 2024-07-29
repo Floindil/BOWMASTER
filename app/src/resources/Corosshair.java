@@ -10,10 +10,14 @@ import java.awt.image.BufferedImage;
 
 import app.src.Utilities;
 
-/** Provides functionalities to create and handle a crosshair on the screen */
+/**
+ * Provides functionalities to create and handle a crosshair on the screen 
+ * Currently also holds attack charging functionalties,
+ * which might be moved to Arrow or Bow later on.
+ */
 public class Corosshair extends Entity {
     
-    private int range;
+    private int range, charge;
     private Point mouseLocation;
 
     /**
@@ -29,18 +33,51 @@ public class Corosshair extends Entity {
         Shape theCircle = new Ellipse2D.Double(0, 0, 20, 20);
         g.draw(theCircle);
         super(image, 0, 0, 1);
+        setTAG("crosshair");
         mouseLocation = new Point();
-        range = 500;
+        range = 200;
     }
 
     @Override
     public void update() {
         super.update();
+        updateCharge();
         Point playerLocation = getPlayerLocation();
         double angle = Utilities.calcAngle(playerLocation, mouseLocation);
-        int x = playerLocation.x + (int) (Math.sin(angle) * range);
-        int y = playerLocation.y - (int) (Math.cos(angle) * range);
+        int chargedRange = range + charge * 20;
+        int x = playerLocation.x + (int) (Math.sin(angle) * chargedRange);
+        int y = playerLocation.y - (int) (Math.cos(angle) * chargedRange);
         setLocation(x, y);
+    }
+
+    /**
+     * Increased the charged variable while charging is true.
+     */
+    private void updateCharge() {
+        if (getCharging()) {
+            ++charge;
+            if (charge >= 25) {
+                charge = 25;
+            }
+        }
+        else {
+            charge = 0;
+        }
+    }
+
+    /**
+     * Sets the value of the charge varible to 0.
+     */
+    public void resetCharge() {
+        charge = 0;
+    }
+
+    /**
+     * Returns the value of the charge variable.
+     * @return value of the charge variable
+     */
+    public int getCharge() {
+        return charge;
     }
 
     /**

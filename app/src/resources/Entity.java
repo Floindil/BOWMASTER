@@ -22,7 +22,7 @@ public class Entity {
     private BufferedImage image, originalImage;
     private int maxHealth, health, distance, speed, cooldown;
     private List<Hitbox> hitBoxes;
-    private Boolean state, healthbar;
+    private Boolean state, healthbar, charging;
     private String TAG;
     private Point playerLocation;
     /** Rectangle to track size and location of the Entity */
@@ -51,7 +51,24 @@ public class Entity {
         healthbar = false;
         maxHealth = health;
         playerLocation = new Point(0,0);
+        charging = false;
         setHealth(health);
+    }
+
+    /**
+     * Sets the state of the charging variable to either true of false.
+     * @param state indicates, if the charge variable should be increased or not
+     */
+    public void setCharging(boolean state) {
+        charging = state;
+    }
+
+    /**
+     * Indicates, if the charge variable should be increased or not.
+     * @return true, if the charge variable is currently beeing increased
+     */
+    public boolean getCharging() {
+        return charging;
     }
 
     /**

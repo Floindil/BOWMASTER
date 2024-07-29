@@ -8,6 +8,7 @@ import java.util.List;
 import app.src.StaticValues;
 import app.src.resources.Arrow;
 import app.src.resources.Bow;
+import app.src.resources.Corosshair;
 import app.src.resources.Entity;
 import app.src.resources.assets.Loader;
 import app.src.resources.components.Button;
@@ -129,7 +130,8 @@ public class Level1 extends Scene {
      */
     public void shoot() {
         if (bow.getCooldown() <= 0) {
-            Point crosshairLocation = getCrossHairLocation();
+            Corosshair crosshair = getCrosshair();
+            Point crosshairLocation = crosshair.getLocation();
             nextArrow.setShot();
             nextArrow.setOriginalImage(nextArrow.getImage());
             nextArrow.setTarget(crosshairLocation.x, crosshairLocation.y);
@@ -138,6 +140,7 @@ public class Level1 extends Scene {
             registerEntity(newArrow);
             nextArrow = newArrow;
             bow.setCooldown();
+            resetCrosshairCharge();
         }
     }
 }

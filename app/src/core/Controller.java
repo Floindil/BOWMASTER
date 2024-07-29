@@ -64,6 +64,14 @@ public class Controller extends JPanel{
     }
 
     /**
+     * Indicates, if the Mouse Button 1 is currently beeing pressed or not.
+     * @return true, if the Button M1 is beeing pressed
+     */
+    public boolean getM1down() {
+        return handler.getM1down();
+    }
+
+    /**
      * Takes a list of Buttons and stores it in the buttonList.
      * @param buttonList    list to store
      */
@@ -87,14 +95,32 @@ public class Controller extends JPanel{
      */
     private class MouseHandler extends MouseAdapter {
 
+        boolean m1down;
+
         @Override
         public void mousePressed(MouseEvent e) {
+            if (e.getButton() == 1) {
+                m1down = true;
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
             if (e.getButton() == 1) {
                 for (Button b: buttonlist) {
                     Point mousePosition = tracker.getLocation();
                     b.actionCheck(mousePosition);
                 }
+                m1down = false;
             }
+        }
+
+        /**
+         * Indicates, if the Mouse Button 1 is currently beeing pressed or not.
+         * @return true, if the Button M1 is beeing pressed
+         */
+        public boolean getM1down() {
+            return m1down;
         }
     }
 
@@ -112,6 +138,11 @@ public class Controller extends JPanel{
             if (location == null) {
                 location = new Point(0, 0);
             }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            location = e.getPoint();
         }
 
         public Point getLocation() {

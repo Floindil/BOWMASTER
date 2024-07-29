@@ -19,7 +19,7 @@ public class Scene {
     private List<Entity> entities;
     private List<Component> components;
     private List<Button> buttons;
-    private boolean menu;
+    private boolean menu, m3down;
     private Corosshair crosshair;
     private String TAG;
     private Scene newScene;
@@ -52,6 +52,7 @@ public class Scene {
     public void update(Point playerLocation) {
         counter += 1;
         List<Entity> entitiesUpdate = new ArrayList<>();
+        crosshair.setCharging(m3down);
         for (Entity entity: entities) {
             entity.update();
             entity.setPlayerLocation(playerLocation.x, playerLocation.y);
@@ -66,11 +67,19 @@ public class Scene {
     }
 
     /**
+     * Indicates, if the Mouse Button 1 is currently beeing pressed or not.
+     * @param state true, if the Button M1 is beeing pressed
+     */
+    public void setM1down(boolean state) {
+        m3down = state;
+    }
+
+    /**
      * Returns the counter of the Scene.
      * The counter is used for time based events.
      * @return Scene counter.
      */
-    public int counter() {
+    public int getCounter() {
         return counter;
     }
 
@@ -88,8 +97,19 @@ public class Scene {
         registerComponent(bg);
     }
 
-    public Point getCrossHairLocation() {
-        return crosshair.getLocation();
+    /**
+     * Sets the charge value of the crosshair to 0.
+     */
+    public void resetCrosshairCharge() {
+        crosshair.resetCharge();
+    }
+
+    /**
+     * Returns the Crosshair Object of the Scene.
+     * @return Crosshair Object
+     */
+    public Corosshair getCrosshair() {
+        return crosshair;
     }
 
     /**
