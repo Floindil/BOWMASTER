@@ -89,10 +89,12 @@ public class Controller extends JPanel{
 
         @Override
         public void mousePressed(MouseEvent e) {
-            for (Button b: buttonlist) {
-                Point mousePosition = tracker.getLocation();
-                b.actionCheck(mousePosition);
-            };
+            if (e.getButton() == 1) {
+                for (Button b: buttonlist) {
+                    Point mousePosition = tracker.getLocation();
+                    b.actionCheck(mousePosition);
+                }
+            }
         }
     }
 

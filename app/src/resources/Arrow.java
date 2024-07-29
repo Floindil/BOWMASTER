@@ -74,7 +74,6 @@ public class Arrow extends Entity {
     public void update() {
         if (shot) {
             distanceCheck();
-
             double factor = (double) getDistance()  / (double) StaticValues.MAX_DISTANCE;
             scaleImage(factor);
             updateLocation(factor);

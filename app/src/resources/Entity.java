@@ -14,7 +14,7 @@ import app.src.resources.components.Hitbox;
 import app.src.resources.components.Rectangle;
 
 /**
- * Creates a Entity that serves as a basis for Monsters and other actors.
+ * Creates an Entity that serves as a base for Monsters and other actors.
  * @see BufferedImage
  * @see Rectangle
  */
