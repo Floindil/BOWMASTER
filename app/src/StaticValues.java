@@ -12,6 +12,8 @@ public class StaticValues {
     
     /** name of the gamewindow */
     public static String GAMENAME = "BOWMASTER";
+    public static String IMAGEDIR = "images/";
+    public static String SOUNDDIR = "sounds/";
     /** width of the gamewindow */
     public static int CANVAS_WIDTH = 1920;
     /** height of the gamewindow */

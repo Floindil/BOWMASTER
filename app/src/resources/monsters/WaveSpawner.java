@@ -2,6 +2,10 @@ package app.src.resources.monsters;
 
 import java.util.List;
 
+import javax.sound.sampled.Clip;
+
+import app.src.resources.assets.Loader;
+
 /**
  * Extends the MonsterSpawner to create Monsters from a List
  * and allows to limit the amount of a Monster TYPE.
@@ -15,6 +19,7 @@ public class WaveSpawner extends MonsterSpawner {
     private Wave activeWave;
     private int activeWaveIndex;
     private boolean empty;
+    private Clip waveSound;
 
     /**
      * Takes a list of Waves, a lower and upper Spawn time limit to create a WaveSpawner
@@ -28,6 +33,8 @@ public class WaveSpawner extends MonsterSpawner {
         activeWaveIndex = 0;
         activeWave = waves.get(activeWaveIndex);
         updateMonsterPool(activeWave.getMonsters());
+        waveSound = Loader.loadSound("Bell1.wav");
+        waveSound.start();
     }
 
     @Override
@@ -70,6 +77,9 @@ public class WaveSpawner extends MonsterSpawner {
         activeWaveIndex += 1;
         activeWave = waves.get(activeWaveIndex);
         updateMonsterPool(activeWave.getMonsters());
+        waveSound.setFramePosition(0);
+        waveSound.start();
         System.out.println("> next wave deployed");
+
     }
 }

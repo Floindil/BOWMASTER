@@ -2,11 +2,22 @@ package app.src.resources.assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import app.src.StaticValues;
 
 /** Loads assets from the asset folder. */
 public class Loader {
+
+    private static String imageDir = StaticValues.IMAGEDIR;
+    private static String soundDir = StaticValues.SOUNDDIR;
     
     /** 
      * Initializes the Loader without any specific configuration.
@@ -24,12 +35,37 @@ public class Loader {
     public static BufferedImage loadImage(String name) {
     BufferedImage image = null;
         try {
-            image = ImageIO.read(Loader.class.getResourceAsStream(name));
+            String imagePath = imageDir + name;
+            InputStream inputStream = Loader.class.getResourceAsStream(imagePath);
+            image = ImageIO.read(inputStream);
             System.out.println("image " + name + " loaded");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("can't load image");
         }
         return image;
+    }
+
+    public static Clip loadSound(String name) {
+        Clip clip = null;
+        try {
+            String soundPath = soundDir + name;
+            InputStream inputStream = Loader.class.getResourceAsStream(soundPath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
+            
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("The specified audio file is not supported.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Error playing the audio file.");
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            System.out.println("Audio line for playing back is unavailable.");
+            e.printStackTrace();
+        }
+        return clip;
     }
 }
