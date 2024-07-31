@@ -8,7 +8,10 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
+import javax.sound.sampled.Clip;
+
 import app.src.Utilities;
+import app.src.resources.assets.Loader;
 
 /**
  * Provides functionalities to create and handle a crosshair on the screen 
@@ -17,8 +20,9 @@ import app.src.Utilities;
  */
 public class Corosshair extends Entity {
     
-    private int range, charge;
+    private int range, charge, overcharge;
     private Point mouseLocation;
+    private Clip drawNoise;
 
     /**
      * Creates a Crosshair Object to aim at Enemys on the Screen.
@@ -36,6 +40,7 @@ public class Corosshair extends Entity {
         setTAG("crosshair");
         mouseLocation = new Point();
         range = 200;
+        drawNoise = Loader.loadSound("Bow4.wav");
     }
 
     @Override
@@ -55,13 +60,21 @@ public class Corosshair extends Entity {
      */
     private void updateCharge() {
         if (getCharging()) {
+            if (overcharge >= 25) {
+                overcharge = 0;
+                resetCharge();
+            }
             ++charge;
+            if (charge == 1) {
+                drawNoise.start();
+            }
             if (charge >= 25) {
                 charge = 25;
+                ++overcharge;
             }
         }
         else {
-            charge = 0;
+            resetCharge();
         }
     }
 
@@ -70,6 +83,8 @@ public class Corosshair extends Entity {
      */
     public void resetCharge() {
         charge = 0;
+        drawNoise.stop();
+        drawNoise.setFramePosition(0);
     }
 
     /**

@@ -4,12 +4,14 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 
 import app.src.StaticValues;
 import app.src.StaticValues.SceneTag;
 import app.src.resources.Arrow;
 import app.src.resources.Entity;
+import app.src.resources.assets.Loader;
 import app.src.resources.monsters.Monster;
 import app.src.scenes.Menu;
 import app.src.scenes.Scene;
@@ -22,16 +24,21 @@ import app.src.scenes.SceneHandler;
  * @see SceneHandler
  */
 public class Gameloop {
-    private Renderer bobRoss = new Renderer();
-    private Controller controller = new Controller();
-    private Menu menu = new Menu();
-    private SceneHandler sceneHandler = new SceneHandler(menu);
+    private Renderer bobRoss;
+    private Controller controller;
+    private Menu menu;
+    private SceneHandler sceneHandler;
+    private Clip hitNoise;
 
     /**
-     * Empty Constructor.
+     * Sets up a Gameloop Object, initializes Renderer, Controller and Scene.
      */
     public Gameloop() {
-
+        bobRoss = new Renderer();
+        controller = new Controller();
+        menu = new Menu();
+        sceneHandler = new SceneHandler(menu);
+        hitNoise = Loader.loadSound("Damage3.wav");
     }
 
     /**
@@ -91,6 +98,9 @@ public class Gameloop {
                                 monster.updateHealth(- multiplier * StaticValues.BASEDAMAGE);
                                 arrow.setState();
                                 System.out.println("Hit detected! Remaining health " + monster.getHealth());
+                                hitNoise.stop();
+                                hitNoise.setFramePosition(0);
+                                hitNoise.start();
                             }
                         }
                     }
