@@ -70,6 +70,7 @@ public class Corosshair extends Entity {
                 if (overcharge >= overchargeLimit) {
                     overcharge = 0;
                     resetCharge();
+                    chargeCooldown = chargeCooldownLimit;
                 }
                 ++charge;
                 if (charge == 1) {
@@ -82,12 +83,12 @@ public class Corosshair extends Entity {
             }
             else {
                 resetCharge();
+                chargeCooldown = 0;
             }
         }
         else {
             --chargeCooldown;
         }
-        
     }
 
     /**
@@ -95,7 +96,6 @@ public class Corosshair extends Entity {
      */
     public void resetCharge() {
         charge = 0;
-        chargeCooldown = chargeCooldownLimit;
         drawNoise.stop();
         drawNoise.setFramePosition(0);
     }
