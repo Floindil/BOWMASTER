@@ -62,6 +62,7 @@ public class Loader {
             
             clip = AudioSystem.getClip();
             clip.open(audioStream);
+            System.out.println("audio " + name + " loaded");
             
         } catch (UnsupportedAudioFileException e) {
             System.out.println("The specified audio file is not supported.");
