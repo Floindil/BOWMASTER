@@ -12,6 +12,7 @@ import app.src.StaticValues.SceneTag;
 import app.src.resources.Arrow;
 import app.src.resources.Entity;
 import app.src.resources.assets.Loader;
+import app.src.resources.assets.sounds.SoundMapping;
 import app.src.resources.monsters.Monster;
 import app.src.scenes.Menu;
 import app.src.scenes.Scene;
@@ -38,7 +39,7 @@ public class Gameloop {
         controller = new Controller();
         menu = new Menu();
         sceneHandler = new SceneHandler(menu);
-        hitNoise = Loader.loadSound("Damage3.wav");
+        hitNoise = Loader.loadSound(SoundMapping.MONSTERHIT);
     }
 
     /**

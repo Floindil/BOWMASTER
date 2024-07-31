@@ -11,6 +11,7 @@ import app.src.resources.Bow;
 import app.src.resources.Corosshair;
 import app.src.resources.Entity;
 import app.src.resources.assets.Loader;
+import app.src.resources.assets.images.ImageMapping;
 import app.src.resources.components.Button;
 import app.src.resources.monsters.Monster;
 import app.src.resources.monsters.MonsterValues;
@@ -40,13 +41,13 @@ public class Level1 extends Scene {
         super(false);
         setTAG("level");
 
-        BufferedImage imgGobclops = Loader.loadImage("Gobclops.png");
-        BufferedImage imgTentathulu = Loader.loadImage("Tentathulu.png");
-        BufferedImage imgFloaket = Loader.loadImage("Floaket.png");
-        BufferedImage imgNighloater = Loader.loadImage("Nighloater.png");
-        BufferedImage imgThoat = Loader.loadImage("Thoat.png");
-        BufferedImage imgBow = Loader.loadImage("Bow1.png");
-        imgArrow = Loader.loadImage("arrow.png");
+        BufferedImage imgGobclops = Loader.loadImage(ImageMapping.GOBCLOPS);
+        BufferedImage imgTentathulu = Loader.loadImage(ImageMapping.TENTATHULU);
+        BufferedImage imgFloaket = Loader.loadImage(ImageMapping.FLOAKET);
+        BufferedImage imgNighloater = Loader.loadImage(ImageMapping.NIGHTLOATER);
+        BufferedImage imgThoat = Loader.loadImage(ImageMapping.THOAT);
+        BufferedImage imgBow = Loader.loadImage(ImageMapping.BOW);
+        imgArrow = Loader.loadImage(ImageMapping.ARROW);
 
         MonsterValues GOBCLOPS = new MonsterValues().getGobclops(imgGobclops);
         MonsterValues TENTATHULU = new MonsterValues().getTentathulu(imgTentathulu);
@@ -54,7 +55,7 @@ public class Level1 extends Scene {
         MonsterValues NIGHTLOATER = new MonsterValues().getNighloater(imgNighloater);
         MonsterValues THOAT = new MonsterValues().getThoat(imgThoat);
 
-        setBG("bg.png");
+        setBG(ImageMapping.MAP1);
 
         Wave wave1 = new Wave();
         wave1.registerMonsters(GOBCLOPS, 1);

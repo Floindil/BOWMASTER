@@ -10,8 +10,10 @@ import java.awt.image.BufferedImage;
 
 import javax.sound.sampled.Clip;
 
+import app.src.StaticValues;
 import app.src.Utilities;
 import app.src.resources.assets.Loader;
+import app.src.resources.assets.sounds.SoundMapping;
 
 /**
  * Provides functionalities to create and handle a crosshair on the screen 
@@ -20,7 +22,10 @@ import app.src.resources.assets.Loader;
  */
 public class Corosshair extends Entity {
     
-    private int range, charge, overcharge;
+    private int range, charge, overcharge, chargeCooldown;
+    private int chargeLimit = StaticValues.CHARGELIMIT;
+    private int overchargeLimit = StaticValues.OVERCHARGELIMIT;
+    private int chargeCooldownLimit = StaticValues.CHARGECOOLDOWN;
     private Point mouseLocation;
     private Clip drawNoise;
 
@@ -40,7 +45,7 @@ public class Corosshair extends Entity {
         setTAG("crosshair");
         mouseLocation = new Point();
         range = 200;
-        drawNoise = Loader.loadSound("Bow4.wav");
+        drawNoise = Loader.loadSound(SoundMapping.DRAW);
     }
 
     @Override
@@ -59,23 +64,29 @@ public class Corosshair extends Entity {
      * Increased the charged variable while charging is true.
      */
     private void updateCharge() {
-        if (getCharging()) {
-            if (overcharge >= 25) {
-                overcharge = 0;
+        if (chargeCooldown == 0) {
+            if (getCharging()) {
+                if (overcharge >= overchargeLimit) {
+                    overcharge = 0;
+                    resetCharge();
+                }
+                ++charge;
+                if (charge == 1) {
+                    drawNoise.start();
+                }
+                if (charge >= chargeLimit) {
+                    charge = chargeLimit;
+                    ++overcharge;
+                }
+            }
+            else {
                 resetCharge();
-            }
-            ++charge;
-            if (charge == 1) {
-                drawNoise.start();
-            }
-            if (charge >= 25) {
-                charge = 25;
-                ++overcharge;
             }
         }
         else {
-            resetCharge();
+            --chargeCooldown;
         }
+        
     }
 
     /**
@@ -83,6 +94,7 @@ public class Corosshair extends Entity {
      */
     public void resetCharge() {
         charge = 0;
+        chargeCooldown = chargeCooldownLimit;
         drawNoise.stop();
         drawNoise.setFramePosition(0);
     }

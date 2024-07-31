@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sound.sampled.Clip;
 
 import app.src.resources.assets.Loader;
+import app.src.resources.assets.sounds.SoundMapping;
 
 /**
  * Extends the MonsterSpawner to create Monsters from a List
@@ -33,7 +34,7 @@ public class WaveSpawner extends MonsterSpawner {
         activeWaveIndex = 0;
         activeWave = waves.get(activeWaveIndex);
         updateMonsterPool(activeWave.getMonsters());
-        waveSound = Loader.loadSound("Bell1.wav");
+        waveSound = Loader.loadSound(SoundMapping.WAVESTART);
         waveSound.start();
     }
 

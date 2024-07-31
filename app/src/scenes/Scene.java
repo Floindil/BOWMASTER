@@ -29,6 +29,7 @@ public class Scene {
     /**
      * Initialises the lists Entities, Components and Buttons.
      * Properties from these lists will be drawn in the Renderer.
+     * @param isMenu determines, if the Scene is considered a Menu.
      */
     public Scene(boolean isMenu) {
         counter = 0;

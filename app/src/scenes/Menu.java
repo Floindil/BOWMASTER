@@ -3,6 +3,7 @@ package app.src.scenes;
 import java.awt.Color;
 
 import app.src.StaticValues;
+import app.src.resources.assets.images.ImageMapping;
 import app.src.resources.components.Button;
 
 /**
@@ -18,7 +19,7 @@ public class Menu extends Scene {
     public Menu() {
         super(true);
         setTAG("menu");
-        setBG("bg.png");
+        setBG(ImageMapping.MAP1);
         int width = StaticValues.CANVAS_WIDTH;
         int height = StaticValues.CANVAS_HEIGHT;
         Button start = new Button(100, 50, width/2, height/2 - 100, "START", Color.GRAY);
@@ -30,7 +31,6 @@ public class Menu extends Scene {
         exit.setAction(() -> {
             System.exit(0);
         });
-        //setBG("HuntersHouse.png");
         registerButton(start);
         registerButton(exit);
     }

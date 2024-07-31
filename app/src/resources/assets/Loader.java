@@ -11,13 +11,14 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import app.src.StaticValues;
+import app.src.resources.assets.images.ImageMapping;
+import app.src.resources.assets.sounds.SoundMapping;
 
 /** Loads assets from the asset folder. */
 public class Loader {
 
-    private static String imageDir = StaticValues.IMAGEDIR;
-    private static String soundDir = StaticValues.SOUNDDIR;
+    private static String imageDir = ImageMapping.DIR;
+    private static String soundDir = SoundMapping.DIR;
     
     /** 
      * Initializes the Loader without any specific configuration.
@@ -27,7 +28,7 @@ public class Loader {
     }
     
     /**
-     * Takes the name of the image and loads it as Buffered image.
+     * Takes the name of an image file and loads it as Buffered image.
      * @param name name like "image.png"
      * @return the loaded image as BufferedImage
      * @see BufferedImage
@@ -46,6 +47,12 @@ public class Loader {
         return image;
     }
 
+    /**
+     * Takes the name of a audio file and loads it as a clip.
+     * @param name name like "sound.wav"
+     * @return the loaded audio as Clip
+     * @see Clip
+     */
     public static Clip loadSound(String name) {
         Clip clip = null;
         try {
