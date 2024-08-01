@@ -26,5 +26,5 @@ public class ImageMapping {
     public static String ARROW = "arrow.png";
     
     /** Image filename for specified Map */
-    public static String MAP1 = "map1.png";
+    public static String MAP1 = "Map1.png";
 }

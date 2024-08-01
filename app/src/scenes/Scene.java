@@ -4,8 +4,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.Clip;
+
 import app.src.resources.Corosshair;
 import app.src.resources.Entity;
+import app.src.resources.assets.Loader;
 import app.src.resources.components.Button;
 import app.src.resources.components.Component;
 
@@ -19,12 +22,13 @@ public class Scene {
     private List<Entity> entities;
     private List<Component> components;
     private List<Button> buttons;
-    private boolean menu, m3down;
+    private boolean menu, m3down, active;
     private Corosshair crosshair;
     private String TAG;
     private Scene newScene;
     private Point mousepoint;
     private int counter;
+    private Clip bgm;
 
     /**
      * Initialises the lists Entities, Components and Buttons.
@@ -32,6 +36,7 @@ public class Scene {
      * @param isMenu determines, if the Scene is considered a Menu.
      */
     public Scene(boolean isMenu) {
+        bgm = null;
         counter = 0;
         entities = new ArrayList<>();
         components = new ArrayList<>();
@@ -43,6 +48,36 @@ public class Scene {
         }
         // Fills the newScene Variable with itself to indicate, that the scene does not have to be changed
         setNewScene(this);
+    }
+
+    /**
+     * Takes the name of a audio file, loads the resource and sets it as bgm.
+     * @param filename name of the audio file to be loaded.
+     */
+    public void setBGM(String filename) {
+        Clip audio = Loader.loadSound(filename);
+        bgm = audio;
+    }
+
+    /**
+     * Collects all operations to be done, when the Scene is started.
+     */
+    public void start() {
+        active = true;
+        if (bgm != null) {
+            bgm.loop(-1);
+        }
+    }
+
+    /**
+     * Collects all operations to be done, when the Scene is stoped.
+     */
+    public void stop() {
+        active = false;
+        if (bgm != null) {
+            bgm.stop();
+            bgm.setFramePosition(0);
+        }
     }
 
     /**
@@ -96,6 +131,14 @@ public class Scene {
         Component bg = new Component(bgName, 0, 0);
         bg.setLocation(bg.getWidth()/2, bg.getHeight()/2);
         registerComponent(bg);
+    }
+
+    /**
+     * Returns true, if the Scene is currently active.
+     * @return true, if the Scene is currently active.
+     */
+    public boolean isActive() {
+        return active;
     }
 
     /**

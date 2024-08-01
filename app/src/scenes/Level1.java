@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.Clip;
+
 import app.src.StaticValues;
 import app.src.resources.Arrow;
 import app.src.resources.Bow;
@@ -12,6 +14,7 @@ import app.src.resources.Corosshair;
 import app.src.resources.Entity;
 import app.src.resources.assets.Loader;
 import app.src.resources.assets.images.ImageMapping;
+import app.src.resources.assets.sounds.SoundMapping;
 import app.src.resources.components.Button;
 import app.src.resources.monsters.Monster;
 import app.src.resources.monsters.MonsterValues;
@@ -31,6 +34,7 @@ public class Level1 extends Scene {
     private int monsterLimit = 5;
     private List<Wave> waves;
     private BufferedImage imgArrow;
+    private Clip shotSE;
     
     /**
      * Sets up the Level1 scene.
@@ -48,6 +52,7 @@ public class Level1 extends Scene {
         BufferedImage imgThoat = Loader.loadImage(ImageMapping.THOAT);
         BufferedImage imgBow = Loader.loadImage(ImageMapping.BOW);
         imgArrow = Loader.loadImage(ImageMapping.ARROW);
+        shotSE = Loader.loadSound(SoundMapping.SHOT);
 
         MonsterValues GOBCLOPS = new MonsterValues().getGobclops(imgGobclops);
         MonsterValues TENTATHULU = new MonsterValues().getTentathulu(imgTentathulu);
@@ -56,6 +61,7 @@ public class Level1 extends Scene {
         MonsterValues THOAT = new MonsterValues().getThoat(imgThoat);
 
         setBG(ImageMapping.MAP1);
+        setBGM(SoundMapping.LEVEL1BGM);
 
         Wave wave1 = new Wave();
         wave1.registerMonsters(GOBCLOPS, 1);
@@ -142,6 +148,9 @@ public class Level1 extends Scene {
             nextArrow = newArrow;
             bow.setCooldown();
             resetCrosshairCharge();
+            shotSE.stop();
+            shotSE.setFramePosition(0);
+            shotSE.start();
         }
     }
 }

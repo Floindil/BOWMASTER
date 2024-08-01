@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import app.src.StaticValues;
 import app.src.resources.assets.images.ImageMapping;
+import app.src.resources.assets.sounds.SoundMapping;
 import app.src.resources.components.Button;
 
 /**
@@ -20,6 +21,7 @@ public class Menu extends Scene {
         super(true);
         setTAG("menu");
         setBG(ImageMapping.MAP1);
+        setBGM(SoundMapping.MENUBGM);
         int width = StaticValues.CANVAS_WIDTH;
         int height = StaticValues.CANVAS_HEIGHT;
         Button start = new Button(100, 50, width/2, height/2 - 100, "START", Color.GRAY);
