@@ -45,20 +45,15 @@ public class Level1 extends Scene {
         super(false);
         setTAG("level");
 
-        BufferedImage imgGobclops = Loader.loadImage(ImageMapping.GOBCLOPS);
-        BufferedImage imgTentathulu = Loader.loadImage(ImageMapping.TENTATHULU);
-        BufferedImage imgFloaket = Loader.loadImage(ImageMapping.FLOAKET);
-        BufferedImage imgNighloater = Loader.loadImage(ImageMapping.NIGHTLOATER);
-        BufferedImage imgThoat = Loader.loadImage(ImageMapping.THOAT);
         BufferedImage imgBow = Loader.loadImage(ImageMapping.BOW);
         imgArrow = Loader.loadImage(ImageMapping.ARROW);
         shotSE = Loader.loadSound(SoundMapping.SHOT);
 
-        MonsterValues GOBCLOPS = new MonsterValues().getGobclops(imgGobclops);
-        MonsterValues TENTATHULU = new MonsterValues().getTentathulu(imgTentathulu);
-        MonsterValues FLOAKET = new MonsterValues().getFloaket(imgFloaket);
-        MonsterValues NIGHTLOATER = new MonsterValues().getNighloater(imgNighloater);
-        MonsterValues THOAT = new MonsterValues().getThoat(imgThoat);
+        MonsterValues GOBCLOPS = new MonsterValues().getGobclops();
+        MonsterValues TENTATHULU = new MonsterValues().getTentathulu();
+        MonsterValues FLOAKET = new MonsterValues().getFloaket();
+        MonsterValues NIGHTLOATER = new MonsterValues().getNighloater();
+        MonsterValues THOAT = new MonsterValues().getThoat();
 
         setBG(ImageMapping.MAP1);
         setBGM(SoundMapping.LEVEL1BGM);
@@ -146,7 +141,7 @@ public class Level1 extends Scene {
             Arrow newArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
             registerEntity(newArrow);
             nextArrow = newArrow;
-            bow.setCooldown();
+            bow.setCooldown(StaticValues.BOWCOOLDOWN);
             resetCrosshairCharge();
             shotSE.stop();
             shotSE.setFramePosition(0);

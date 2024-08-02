@@ -2,12 +2,19 @@ package app.src.resources.monsters;
 
 import java.awt.image.BufferedImage;
 
+import javax.sound.sampled.Clip;
+
+import app.src.resources.assets.Loader;
+import app.src.resources.assets.images.ImageMapping;
+import app.src.resources.assets.sounds.SoundMapping;
+
 /**
  * Stores the blueprints for Monsters.
  */
 public class MonsterValues {
 
     private BufferedImage image;
+    private Clip noise;
     private String TYPE;
     private int speed;
     private int health;
@@ -42,9 +49,10 @@ public class MonsterValues {
      * @param loadedImage previously loaded Image
      * @return a Gobclops!
      */
-    public MonsterValues getGobclops(BufferedImage loadedImage) {
+    public MonsterValues getGobclops() {
         setTYPE("Gobclops");
-        setImage(loadedImage);
+        setImage(ImageMapping.GOBCLOPS);
+        setNoise(SoundMapping.GOBCLOPS);
         setSpeed(1);
         setHealth(100);
         final int[] hitbox1 = {130, 170, 0, 0, 1};
@@ -60,9 +68,10 @@ public class MonsterValues {
      * @param loadedImage previously loaded Image
      * @return a Thoat!
      */
-    public MonsterValues getThoat(BufferedImage loadedImage) {
+    public MonsterValues getThoat() {
         setTYPE("Thoat");
-        setImage(loadedImage);
+        setImage(ImageMapping.THOAT);
+        setNoise(SoundMapping.THOAT);
         setSpeed(2);
         setHealth(50);
         final int[] hitbox1 = {140, 130, 0, -50, 1};
@@ -80,9 +89,10 @@ public class MonsterValues {
      * @param loadedImage previously loaded Image
      * @return a Nighloater!
      */
-    public MonsterValues getNighloater(BufferedImage loadedImage) {
+    public MonsterValues getNighloater() {
         setTYPE("Nighloater");
-        setImage(loadedImage);
+        setImage(ImageMapping.NIGHTLOATER);
+        setNoise(SoundMapping.NIGHTLOATER);
         setSpeed(5);
         setHealth(20);
         final int[] bodyBox = {100, 160, 0, 0, 1};
@@ -97,9 +107,10 @@ public class MonsterValues {
      * @param loadedImage previously loaded Image
      * @return a Floaket!
      */
-    public MonsterValues getFloaket(BufferedImage loadedImage) {
+    public MonsterValues getFloaket() {
         setTYPE("Floaket");
-        setImage(loadedImage);
+        setImage(ImageMapping.FLOAKET);
+        setNoise(SoundMapping.FLOAKET);
         setSpeed(3);
         setHealth(30);
         final int[] lowerBodyBox = {220, 120, 0, 100, 1};
@@ -115,9 +126,10 @@ public class MonsterValues {
      * @param loadedImage previously loaded Image
      * @return a Tentathulu!
      */
-    public MonsterValues getTentathulu(BufferedImage loadedImage) {
+    public MonsterValues getTentathulu() {
         setTYPE("Tentathulu");
-        setImage(loadedImage);
+        setImage(ImageMapping.TENTATHULU);
+        setNoise(SoundMapping.TENTATHULU);
         setSpeed(1);
         setHealth(100);
         final int[] lowerBodyBox = {260, 140, 0, 70, 1};
@@ -163,12 +175,12 @@ public class MonsterValues {
     }
 
     /**
-     * Sets the name of the Monster image.
-     * The name is used to load an image from assets.
-     * @param newImage image name
+     * Takes a filename of an image file in the images folder of assets,
+     * loads the Image and stores it in the image variable.
+     * @param filename image filename
      */
-    public void setImage(BufferedImage newImage) {
-        image = newImage;
+    public void setImage(String filename) {
+        image = Loader.loadImage(filename);
     }
 
     /**
@@ -177,6 +189,23 @@ public class MonsterValues {
      */
     public BufferedImage getImage() {
         return image;
+    }
+
+    /**
+     * Takes a filename of an audio file in the sounds folder of assets,
+     * loads the Sound and stores it in the noise variable.
+     * @param filename audio filename
+     */
+    public void setNoise(String filename) {
+        noise = Loader.loadSound(filename);
+    }
+
+    /**
+     * Returns the Monster noise.
+     * @return noise
+     */
+    public Clip getNoise() {
+        return noise;
     }
 
     /**

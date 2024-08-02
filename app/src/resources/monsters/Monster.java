@@ -2,6 +2,9 @@ package app.src.resources.monsters;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import javax.sound.sampled.Clip;
 
 import app.src.StaticValues;
 import app.src.Utilities;
@@ -23,11 +26,12 @@ public class Monster extends Entity {
      * @param speed speed of the Monster
      * @param type TYPE of the Monster
      */
-    public Monster(BufferedImage loadedImage, int health, int speed, String type) {
+    public Monster(BufferedImage loadedImage, int health, int speed, String type, Clip noise) {
         super(loadedImage, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
         setTAG("monster");
         setHealthbar();
         setSpeed(speed);
+        setNoise(noise);
         TYPE = type;
     }
 
@@ -48,12 +52,26 @@ public class Monster extends Entity {
         setLocation(newX, location.y);
     }
 
+    public void updateNoise() {
+        if (getCooldown() == 0) {
+            makeNoise();
+            int newCooldown = new Random().nextInt(60, 120);
+            setCooldown(newCooldown);
+        }
+        else {
+            decreaseCooldown();
+        }
+    }
+
     /**
      * Updates and scales the position and Hitboxes of the Monster object based on the Distance value.
      */
     @Override
     public void update() {
         super.update();
+        if (getNoise() != null) {
+            updateNoise();
+        }
         if (getState()) {
             int dist = getDistance();
             if (dist + getSpeed() >= StaticValues.MAX_DISTANCE) {

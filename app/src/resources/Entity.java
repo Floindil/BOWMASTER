@@ -7,7 +7,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.src.StaticValues;
+import javax.sound.sampled.Clip;
+
 import app.src.Utilities;
 import app.src.StaticValues.Corners;
 import app.src.resources.components.Hitbox;
@@ -24,9 +25,11 @@ public class Entity {
     private List<Hitbox> hitBoxes;
     private Boolean state, healthbar, charging;
     private String TAG;
+    private Clip noise;
     private Point playerLocation;
     /** Rectangle to track size and location of the Entity */
     public Rectangle rect;
+    
 
     /**
      * Takes an image name, coordinates and health value to create an Entity.
@@ -53,6 +56,31 @@ public class Entity {
         playerLocation = new Point(0,0);
         charging = false;
         setHealth(health);
+    }
+
+    /**
+     * Takes a Clip object to set as the noise of the Monster.
+     * @param noise noise that the Monster will make
+     */
+    public void setNoise(Clip noise) {
+        this.noise = noise;
+    }
+
+    /**
+     * Retunrs the Clip object stored in the noise value or null.
+     * @return Clip object or null
+     */
+    public Clip getNoise() {
+        return noise;
+    }
+
+    /**
+     * Plays the audio Clip stored in the noise variable.
+     */
+    public void makeNoise() {
+        noise.stop();
+        noise.setFramePosition(0);
+        noise.start();
     }
 
     /**
@@ -130,10 +158,10 @@ public class Entity {
     }
 
     /**
-     * Sets the cooldwon counter to max.
+     * Takes an int Value and stores it in the cooldwon variable.
      */
-    public void setCooldown() {
-        cooldown = StaticValues.BOWCOOLDOWN;
+    public void setCooldown(int newCooldown) {
+        cooldown = newCooldown;
     }
 
     /**
@@ -142,6 +170,10 @@ public class Entity {
      */
     public int getCooldown() {
         return cooldown;
+    }
+
+    public void decreaseCooldown() {
+        --cooldown;
     }
 
     /**
@@ -388,5 +420,7 @@ public class Entity {
      */
     public void death() {
         setState();
+        noise.stop();
+        noise.setFramePosition(cooldown);
     }
 }
