@@ -28,7 +28,7 @@ public class Monster extends Entity {
      * @param noise previously loaded audio Clip for the Monster
      */
     public Monster(BufferedImage loadedImage, int health, int speed, String type, Clip noise) {
-        super(loadedImage, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
+        super(loadedImage, 0, 0, health);
         setTAG("monster");
         setHealthbar();
         setSpeed(speed);
@@ -79,34 +79,31 @@ public class Monster extends Entity {
             updateNoise();
         }
         if (getState()) {
+            int spawnDist = StaticValues.MONSTER_SPAWN_DISTANCE;
             int dist = getDistance();
-            if (dist + getSpeed() >= StaticValues.MAX_DISTANCE) {
-                dist = StaticValues.MAX_DISTANCE;
+            if (dist + getSpeed() >= spawnDist) {
+                dist = spawnDist;
             }
             else {
                 updateDistance();
             }
 
-            double factor = (double) getDistance()  / (double) StaticValues.MAX_DISTANCE;
+            dist = getDistance();
+            double factor = (double) dist / (double) spawnDist;
 
             scaleImage(factor);
             scaleHitBoxes(factor);
 
-            int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
-            Point pos = rect.getLocation();
-
+            Point location = getLocation();
             Point playerLocation = getPlayerLocation();
-            double angle = Utilities.calcAngle(playerLocation, pos);
-            int deltaX = Math.abs((int) (Math.tan(angle) * getSpeed()));
-            int newX = pos.x + deltaX;
-            if (pos.x > playerLocation.x) {
-                newX = pos.x - deltaX;
-            }
-            pos.x = newX;
 
-            pos.y = newY;
-            setLocation(pos.x, pos.y);
-            updateHitBoxes(pos.x, pos.y);
+            double angle = Utilities.calcAngle(playerLocation, location);
+            int distRemaining = spawnDist - dist;
+
+            int newX = playerLocation.x + (int) (distRemaining * Math.sin(angle));
+            int newY = playerLocation.y - (int) (distRemaining * Math.cos(angle));
+            setLocation(newX, newY);
+            updateHitBoxes(newX, newY);
         }
     }
 }

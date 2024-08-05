@@ -41,23 +41,9 @@ public class Utilities {
     public static double calcAngle(Point P1, Point P2) {
         double lenX = P1.x - P2.x;
         double lenY = P1.y - P2.y;
-        double angle = Math.atan(lenY/lenX);
-        if (lenX <= 0) {
-            if (lenY <= 0) {
-                angle = Math.PI/2;
-            } else {
-                angle = Math.PI/2 + angle;
-                if (angle == 0) {
-                }
-            }
-        } else {
-            if (lenY <= 0) {
-                angle = - Math.PI/2;
-            } else {
-                angle = - Math.PI/2 + angle;
-                if (angle == 0) {
-                }
-            }
+        double angle = Math.atan(Math.abs(lenX)/Math.abs(lenY));
+        if (lenX >= 0) {
+            angle = -angle;
         }
         return angle;
     }

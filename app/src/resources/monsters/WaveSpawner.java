@@ -1,5 +1,6 @@
 package app.src.resources.monsters;
 
+import java.awt.Point;
 import java.util.List;
 
 import javax.sound.sampled.Clip;
@@ -28,8 +29,8 @@ public class WaveSpawner extends MonsterSpawner {
      * @param lowerSpawnTime lower Spawn time limit
      * @param upperSpawnTime upper Spawn time limit
      */
-    public WaveSpawner(List<Wave> newWaves ,int lowerSpawnTime, int upperSpawnTime) {
-        super(lowerSpawnTime, upperSpawnTime);
+    public WaveSpawner(List<Wave> newWaves ,int lowerSpawnTime, int upperSpawnTime, Point playerLocation) {
+        super(lowerSpawnTime, upperSpawnTime, playerLocation);
         waves = newWaves;
         activeWaveIndex = 0;
         activeWave = waves.get(activeWaveIndex);

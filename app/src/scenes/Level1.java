@@ -58,6 +58,13 @@ public class Level1 extends Scene {
         setBG(ImageMapping.MAP1);
         setBGM(SoundMapping.LEVEL1BGM);
 
+        bow = new Bow(imgBow);
+        registerEntity(bow);
+        Point bowLocation = bow.getLocation();
+
+        nextArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
+        registerEntity(nextArrow);
+
         Wave wave1 = new Wave();
         wave1.registerMonsters(GOBCLOPS, 1);
         wave1.registerMonsters(TENTATHULU, 1);
@@ -74,7 +81,7 @@ public class Level1 extends Scene {
         waves.add(wave2);
         waves.add(wave3);
 
-        spawner = new WaveSpawner(waves, 25, 50);
+        spawner = new WaveSpawner(waves, 25, 50, bow.getLocation());
 
         Button shooter = new Button(
             StaticValues.CANVAS_WIDTH,
@@ -84,13 +91,6 @@ public class Level1 extends Scene {
         );
         shooter.setAction(() -> {shoot();});
         registerButton(shooter);
-
-        bow = new Bow(imgBow);
-        registerEntity(bow);
-        Point bowLocation = bow.getLocation();
-
-        nextArrow = new Arrow(imgArrow, bowLocation.x, bowLocation.y);
-        registerEntity(nextArrow);
     }
 
     @Override

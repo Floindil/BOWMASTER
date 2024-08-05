@@ -46,7 +46,6 @@ public class Corosshair extends Entity {
         mouseLocation = new Point();
         range = 200;
         drawNoise = Loader.loadSound(SoundMapping.DRAW);
-        setDistance(StaticValues.MAX_DISTANCE);
     }
 
     @Override

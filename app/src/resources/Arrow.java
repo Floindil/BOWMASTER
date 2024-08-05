@@ -32,7 +32,7 @@ public class Arrow extends Entity {
         target = new Point();
 
         setLocation(rect.getX(), rect.getY());
-        setDistance(StaticValues.MAX_DISTANCE);
+        setDistance(StaticValues.MONSTER_SPAWN_DISTANCE);
         setSpeed(-20);
     }
 
@@ -74,7 +74,7 @@ public class Arrow extends Entity {
     public void update() {
         if (shot) {
             distanceCheck();
-            double factor = (double) getDistance()  / (double) StaticValues.MAX_DISTANCE;
+            double factor = (double) getDistance()  / (double) StaticValues.MONSTER_SPAWN_DISTANCE;
             scaleImage(factor);
             updateLocation(factor);
             int polarDistance = Utilities.calcDistance(getPlayerLocation(), getLocation());
@@ -111,11 +111,11 @@ public class Arrow extends Entity {
      * Updates the x value based on the angle to the target and the speed.
      * @param factor describes the distance in relation to the total travel Distance
      */
-    private void updateLocation(double factor) {
-        int newY = StaticValues.SpawnY + (int) (StaticValues.TRAVEL_DISTANCE_Y*factor);
+    private void updateLocation(double factor) {;
         Point location = getLocation();
         double angle = Utilities.calcAngle(location, target);
-        int newX = location.x + (int) (Math.abs(getSpeed()) * Math.tan(angle));
+        int newX = location.x + (int) (Math.abs(getSpeed()) * Math.sin(angle));
+        int newY = location.y - (int) (Math.abs(getSpeed()) * Math.cos(angle));
         setLocation(newX, newY);
     }
 

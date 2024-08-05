@@ -22,14 +22,8 @@ public class StaticValues {
 
 
     // Boardcontext
-    /** maximum distance an Entity can travel */
-    public static int MAX_DISTANCE = 600;
-    /** Highest possible Y Value for Monsters */
-    public static int TRAVEL_DISTANCE_Y = CANVAS_HEIGHT - 300;
-    /** Spawnline for Monsters */
-    public static int SpawnY = 100;
-    /** Determines the Padding to the window edge for Monster spawns */
-    public static int SPAWNPADDING = 100;
+    /** Monster distance on spawn */
+    public static int MONSTER_SPAWN_DISTANCE = 800;
     /** Player start location x */
     public static int PLAYERSPAWNX = CANVAS_WIDTH/2;
     /** Player start location y */

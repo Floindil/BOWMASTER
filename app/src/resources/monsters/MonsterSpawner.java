@@ -13,7 +13,7 @@ import app.src.StaticValues;
 public class MonsterSpawner {
     private List<MonsterValues> monsterPool;
     private Random duck;
-    private Point SpawnRangeX, SpawnTimeRange;
+    private Point spawnTimeRange, playerLocation;
     private int cooldownCounter, monsterCounter;
 
     /**
@@ -21,13 +21,13 @@ public class MonsterSpawner {
      * to create a MonsterSpawner
      * @param lowerSpawnTime lower limit for the delay before the next Monster is spawned
      * @param upperSpawnTime upper limit for the delay before the next Monster is spawned
+     * @param playerLocation Sets the playerLocation on which the spawn point is dependent on.
      */
-    public MonsterSpawner(int lowerSpawnTime, int upperSpawnTime) {
+    public MonsterSpawner(int lowerSpawnTime, int upperSpawnTime, Point playerLocation) {
         duck = new Random();
         monsterPool = new ArrayList<>();
-        int padding = StaticValues.SPAWNPADDING;
-        SpawnRangeX = new Point(0 + padding, StaticValues.CANVAS_WIDTH - padding);
-        SpawnTimeRange = new Point(lowerSpawnTime, upperSpawnTime);
+        spawnTimeRange = new Point(lowerSpawnTime, upperSpawnTime);
+        this.playerLocation = playerLocation;
         cooldownCounter = 0;
     }
 
@@ -89,8 +89,11 @@ public class MonsterSpawner {
         for (int[] value: mv.getHitboxes()) {
             nextMonster.addHitBox(value[0], value[1], value[2], value[3], value[4]);
         }
-        int newX = duck.nextInt(SpawnRangeX.y - SpawnRangeX.x) + SpawnRangeX.x;
-        nextMonster.setX(newX);
+        double angle = randomAngle();
+        int distance = StaticValues.MONSTER_SPAWN_DISTANCE;
+        int newX = playerLocation.x + (int) (Math.sin(angle) * distance);
+        int newY = playerLocation.y - (int) Math.abs((Math.cos(angle) * distance));
+        nextMonster.setLocation(newX, newY);;
         System.out.println(
             "Spawned a " +
             nextMonster.getTYPE() +
@@ -107,8 +110,18 @@ public class MonsterSpawner {
      * of the Spawner to a random time iside the range.
      */
     private void setCooldown() {
-        int max = SpawnTimeRange.y;
-        int min = SpawnTimeRange.x;
+        int max = spawnTimeRange.y;
+        int min = spawnTimeRange.x;
         cooldownCounter = duck.nextInt(max - min) + min;
+    }
+
+    /**
+     * Creates and retuns a random double between -PI/2 and PI/2.
+     * @return random angle
+     */
+    private double randomAngle() {
+        Random random = new Random();
+        double angle = random.nextDouble(-Math.PI/2, Math.PI/2);
+        return angle;
     }
 }
