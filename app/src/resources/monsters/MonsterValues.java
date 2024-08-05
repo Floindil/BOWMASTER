@@ -46,7 +46,6 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Gobclops!
-     * @param loadedImage previously loaded Image
      * @return a Gobclops!
      */
     public MonsterValues getGobclops() {
@@ -65,7 +64,6 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Thoat!
-     * @param loadedImage previously loaded Image
      * @return a Thoat!
      */
     public MonsterValues getThoat() {
@@ -86,7 +84,6 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Nighloater!
-     * @param loadedImage previously loaded Image
      * @return a Nighloater!
      */
     public MonsterValues getNighloater() {
@@ -104,7 +101,6 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Floaket!
-     * @param loadedImage previously loaded Image
      * @return a Floaket!
      */
     public MonsterValues getFloaket() {
@@ -123,7 +119,6 @@ public class MonsterValues {
 
     /**
      * Creates and returns a Tentathulu!
-     * @param loadedImage previously loaded Image
      * @return a Tentathulu!
      */
     public MonsterValues getTentathulu() {

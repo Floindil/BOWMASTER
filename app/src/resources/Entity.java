@@ -159,6 +159,7 @@ public class Entity {
 
     /**
      * Takes an int Value and stores it in the cooldwon variable.
+     * @param newCooldown Value for the new cooldown
      */
     public void setCooldown(int newCooldown) {
         cooldown = newCooldown;
@@ -172,6 +173,9 @@ public class Entity {
         return cooldown;
     }
 
+    /**
+     * Decreases the Entity cooldown by 1.
+     */
     public void decreaseCooldown() {
         --cooldown;
     }

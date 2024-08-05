@@ -25,6 +25,7 @@ public class Monster extends Entity {
      * @param health hitpoints the Monster can take before dying
      * @param speed speed of the Monster
      * @param type TYPE of the Monster
+     * @param noise previously loaded audio Clip for the Monster
      */
     public Monster(BufferedImage loadedImage, int health, int speed, String type, Clip noise) {
         super(loadedImage, StaticValues.CANVAS_WIDTH/2, StaticValues.SpawnY, health);
@@ -52,10 +53,15 @@ public class Monster extends Entity {
         setLocation(newX, location.y);
     }
 
+    /**
+     * Updates the cooldown for the noise.
+     * If the Cooldown is 0, the noise is played
+     * and a new, random cooldown is set.
+     */
     public void updateNoise() {
         if (getCooldown() == 0) {
             makeNoise();
-            int newCooldown = new Random().nextInt(60, 120);
+            int newCooldown = new Random().nextInt(120, 240);
             setCooldown(newCooldown);
         }
         else {

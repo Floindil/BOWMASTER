@@ -33,6 +33,7 @@ public class Renderer extends JFrame{
     private Scene scene;
     /** Canvas to draw the Scene on */
     public Canvas canvas = new Canvas();
+    /** Used to set debug mode */
     private boolean debug = false;
 
     /**
@@ -49,6 +50,7 @@ public class Renderer extends JFrame{
 
     /**
      * Creates a Renderer Object.
+     * @param debug if true, Hitboxes and ImageBoxes will be drawn
      */
     public Renderer(boolean debug) {
         canvas.setPreferredSize(new Dimension(StaticValues.CANVAS_WIDTH, StaticValues.CANVAS_HEIGHT));
